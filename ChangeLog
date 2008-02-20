@@ -1,5 +1,10 @@
 = Revision history for apache_secure_download
 
+== 0.0.2 [2008-02-20]
+
+* Added helper module Apache::SecureDownload::Util
+* Made directory structure reflect module structure
+
 == 0.0.1 [2008-02-15]
 
 * Birthday :-)

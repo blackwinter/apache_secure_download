@@ -1,4 +1,4 @@
-require %q{lib/apache_secure_download/version}
+require %q{lib/apache/secure_download/version}
 
 begin
   require 'hen'
