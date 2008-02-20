@@ -2,7 +2,7 @@
 
 == VERSION
 
-This documentation refers to apache_secure_download version 0.0.1
+This documentation refers to apache_secure_download version 0.0.2
 
 
 == DESCRIPTION
@@ -16,9 +16,21 @@ Place the following snippet in your Apache config:
 
     <Location /secure>
       # pass your shared secret string to the handler -- secret means SECRET!
-      RubyAccessHandler Apache::SecureDownload.new("secret-string")
+      RubyAccessHandler Apache::SecureDownload.new("secret")
     </Location>
   </IfModule>
+
+And create links to your resources with timestamp and token:
+
+  require 'apache/secure_download/util'
+
+  timestamp = 1.minute.from_now  # e.g.
+  token     = Apache::SecureDownload::Util.token("secret", path, timestamp)
+
+  url = path + "?timestamp=#{timestamp}&token=#{token}"
+
+  # or simply use the provided helper:
+  url = Apache::SecureDownload::Util.secure_url("secret", path, 1.minute.from_now)
 
 
 == AUTHORS

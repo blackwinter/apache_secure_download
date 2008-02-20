@@ -1,8 +1,7 @@
 #--
 ###############################################################################
 #                                                                             #
-# apache_secure_download -- Apache module providing secure downloading        #
-#                           functionality                                     #
+# A component of apache_secure_download.                                      #
 #                                                                             #
 # Copyright (C) 2008 University of Cologne,                                   #
 #                    Albertus-Magnus-Platz,                                   #
@@ -27,24 +26,30 @@
 ###############################################################################
 #++
 
-require 'rubygems'
-require 'apache/secure_download/util'
+require 'digest/sha1'
+require 'uri'
 
 module Apache
 
   class SecureDownload
 
-    def initialize(secret)
-      raise ArgumentError, 'secret string missing' unless @secret = secret
-    end
+    module Util
 
-    def check_access(request)
-      timestamp = request.param('timestamp')
+      extend self
 
-      return FORBIDDEN if timestamp.to_i < Time.now.to_i
-      return FORBIDDEN if request.param('token') != Util.token(@secret, request.uri, timestamp)
+      def token(secret, path, timestamp)
+        Digest::SHA1.hexdigest(secret + path + timestamp.to_s)
+      end
 
-      return OK
+      def secure_url(secret, url, timestamp = Time.now + 60)
+        path, _, query = URI.split(url)[5..7]
+        path << '?' << query if query
+
+        timestamp = timestamp.to_i
+
+        url + "#{query ? '&' : '?'}timestamp=#{timestamp}&token=#{token(secret, path, timestamp)}"
+      end
+
     end
 
   end
