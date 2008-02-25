@@ -2,7 +2,7 @@
 
 == VERSION
 
-This documentation refers to apache_secure_download version 0.0.2
+This documentation refers to apache_secure_download version 0.0.3
 
 
 == DESCRIPTION
@@ -31,6 +31,12 @@ And create links to your resources with timestamp and token:
 
   # or simply use the provided helper:
   url = Apache::SecureDownload::Util.secure_url("secret", path, 1.minute.from_now)
+
+  # make resulting URL cacheable for 30 seconds (on average):
+  url = Apache::SecureDownload::Util.secure_url("secret", path, :expires => 1.minute.from_now, :cache => 30)
+
+  # specify expiration time using an offset (results in Time.now + 60; also includes caching for 60 seconds):
+  url = Apache::SecureDownload::Util.secure_url("secret", path, :offset => 60)
 
 
 == AUTHORS
