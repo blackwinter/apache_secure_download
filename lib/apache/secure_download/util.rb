@@ -41,11 +41,20 @@ module Apache
         Digest::SHA1.hexdigest(secret + path + timestamp.to_s)
       end
 
-      def secure_url(secret, url, timestamp = Time.now + 60)
+      def secure_url(secret, url, expires = Time.now + 60)
         path, _, query = URI.split(url)[5..7]
         path << '?' << query if query
 
-        timestamp = timestamp.to_i
+        if expires.is_a?(Hash)
+          timestamp = (expires[:expires] || Time.now + (expires[:offset] ||= 60)).to_i
+
+          unless expires[:cache] == false || (cache = expires[:cache] || expires[:offset]).zero?
+            # makes the URL cacheable for +cache+ seconds *on average*
+            timestamp = ((timestamp / cache.to_f).round + 1) * cache.to_i
+          end
+        else
+          timestamp = expires.to_i
+        end
 
         url + "#{query ? '&' : '?'}timestamp=#{timestamp}&token=#{token(secret, path, timestamp)}"
       end

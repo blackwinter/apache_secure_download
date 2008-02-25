@@ -1,5 +1,11 @@
 = Revision history for apache_secure_download
 
+== 0.0.3 [2008-02-25]
+
+* Apache::SecureDownload::Util.secure_url
+** also takes a hash with options instead of explicit expiration time
+** can create cacheable URLs by setting the <tt>:cache</tt> option
+
 == 0.0.2 [2008-02-20]
 
 * Added helper module Apache::SecureDownload::Util
