@@ -6,8 +6,9 @@
 
 == 0.0.3 [2008-02-25]
 
-* Apache::SecureDownload::Util.secure_url also takes a hash with options instead of explicit expiration time
-* Apache::SecureDownload::Util.secure_url can create cacheable URLs by setting the <tt>:cache</tt> option
+* Apache::SecureDownload::Util.secure_url
+  * also takes a hash with options instead of explicit expiration time
+  * can create cacheable URLs by setting the <tt>:cache</tt> option
 
 == 0.0.2 [2008-02-20]
 
