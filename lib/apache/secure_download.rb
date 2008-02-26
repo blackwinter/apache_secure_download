@@ -34,10 +34,20 @@ module Apache
 
   class SecureDownload
 
+    # Creates a new RubyAccessHandler instance for the Apache web server.
+    # The argument +secret+ is the shared secret string that the application
+    # uses to create valid URLs (tokens).
     def initialize(secret)
       raise ArgumentError, 'secret string missing' unless @secret = secret
     end
 
+    # Checks whether the current +request+ satisfies the following requirements:
+    #
+    # 1. The expiration time lies in the future (i.e., not expired)
+    # 2. The token is valid for the requested URL and the given timestamp
+    #
+    # If either condition doesn't hold true, access to the requested resource
+    # is forbidden!
     def check_access(request)
       timestamp = request.param('timestamp')
 
