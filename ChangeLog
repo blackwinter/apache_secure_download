@@ -1,5 +1,9 @@
 = Revision history for apache_secure_download
 
+== 0.0.5 [2008-03-29]
+
+* Added AlwaysOK and AlwaysFORBIDDEN handlers
+
 == 0.0.4 [2008-02-26]
 
 * Some documentation, at last

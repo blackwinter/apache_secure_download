@@ -57,6 +57,28 @@ module Apache
       return OK
     end
 
+    class AlwaysOK
+
+      include Singleton
+
+      # Simply allow all requests.
+      def check_access(request)
+        return OK
+      end
+
+    end
+
+    class AlwaysFORBIDDEN
+
+      include Singleton
+
+      # Deny all requests, no matter what.
+      def check_access(request)
+        return FORBIDDEN
+      end
+
+    end
+
   end
 
 end
