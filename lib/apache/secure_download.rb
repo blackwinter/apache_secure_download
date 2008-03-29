@@ -37,8 +37,12 @@ module Apache
     # Creates a new RubyAccessHandler instance for the Apache web server.
     # The argument +secret+ is the shared secret string that the application
     # uses to create valid URLs (tokens).
-    def initialize(secret)
-      raise ArgumentError, 'secret string missing' unless @secret = secret
+    def initialize(secret, options = {})
+      raise ArgumentError, 'secret string missing' unless secret.is_a?(String)
+
+      @secret = secret
+      @allow  = options[:allow]
+      @deny   = options[:deny]
     end
 
     # Checks whether the current +request+ satisfies the following requirements:
@@ -49,34 +53,15 @@ module Apache
     # If either condition doesn't hold true, access to the requested resource
     # is forbidden!
     def check_access(request)
+      return FORBIDDEN if @deny  && request.uri =~ @deny
+      return OK        if @allow && request.uri =~ @allow
+
       timestamp = request.param('timestamp')
 
       return FORBIDDEN if timestamp.to_i < Time.now.to_i
       return FORBIDDEN if request.param('token') != Util.token(@secret, request.uri, timestamp)
 
       return OK
-    end
-
-    class AlwaysOK
-
-      include Singleton
-
-      # Simply allow all requests.
-      def check_access(request)
-        return OK
-      end
-
-    end
-
-    class AlwaysFORBIDDEN
-
-      include Singleton
-
-      # Deny all requests, no matter what.
-      def check_access(request)
-        return FORBIDDEN
-      end
-
     end
 
   end

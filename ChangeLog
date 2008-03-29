@@ -1,5 +1,10 @@
 = Revision history for apache_secure_download
 
+== 0.0.6 [2008-03-29]
+
+* Reverted v0.0.5
+* Added options to Apache::SecureDownload.new to allow or deny by regexp
+
 == 0.0.5 [2008-03-29]
 
 * Added AlwaysOK and AlwaysFORBIDDEN handlers
