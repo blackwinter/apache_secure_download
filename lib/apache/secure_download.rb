@@ -38,11 +38,13 @@ module Apache
     # The argument +secret+ is the shared secret string that the application
     # uses to create valid URLs (tokens).
     def initialize(secret, options = {})
-      raise ArgumentError, 'secret string missing' unless secret.is_a?(String)
-
       @secret = secret
-      @allow  = options[:allow]
       @deny   = options[:deny]
+      @allow  = options[:allow]
+
+      raise ArgumentError, 'secret string missing'  unless @secret.is_a?(String)
+      raise ArgumentError, ':deny is not a regexp'  unless @deny.nil?  || @deny.is_a?(Regexp)
+      raise ArgumentError, ':allow is not a regexp' unless @allow.nil? || @allow.is_a?(Regexp)
     end
 
     # Checks whether the current +request+ satisfies the following requirements:
@@ -59,7 +61,7 @@ module Apache
       timestamp = request.param('timestamp')
 
       return FORBIDDEN if timestamp.to_i < Time.now.to_i
-      return FORBIDDEN if request.param('token') != Util.token(@secret, request.uri, timestamp)
+      return FORBIDDEN if request.param('token') != Util.token(@secret, request.unparsed_uri, timestamp)
 
       return OK
     end

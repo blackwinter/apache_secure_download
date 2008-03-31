@@ -37,9 +37,13 @@ module Apache
 
       extend self
 
+      QUERY_RE = %r{([?&])timestamp=.*?&token=.*?(&|\z)}o
+
       # Computes the token from +secret+, +path+, and +timestamp+.
       def token(secret, path, timestamp)
-        Digest::SHA1.hexdigest(secret + path + timestamp.to_s)
+        Digest::SHA1.hexdigest(
+          secret + path.sub(QUERY_RE) { $1 unless $2.empty? } + timestamp.to_s
+        )
       end
 
       # Creates a valid URL to the secured resource, identified by +url+. The

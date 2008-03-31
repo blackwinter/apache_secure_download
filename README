@@ -2,7 +2,7 @@
 
 == VERSION
 
-This documentation refers to apache_secure_download version 0.0.6
+This documentation refers to apache_secure_download version 0.0.7
 
 
 == DESCRIPTION
@@ -12,7 +12,11 @@ Place the following snippet in your Apache config:
   # protect files by Apache Secure Download
   <IfModule mod_ruby.c>
     RubyRequire apache/ruby-run
+
     RubyRequire /path/to/apache_secure_download
+    # or
+    #RubyRequire rubygems
+    #RubyRequire apache/secure_download
 
     <Location /secure>
       # pass your shared secret string to the handler -- secret means SECRET!
