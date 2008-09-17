@@ -42,7 +42,7 @@ module Apache
       # Computes the token from +secret+, +path+, and +timestamp+.
       def token(secret, path, timestamp)
         Digest::SHA1.hexdigest(
-          secret + path.sub(QUERY_RE) { $1 unless $2.empty? } + timestamp.to_s
+          "#{secret}#{path.sub(QUERY_RE) { $1 unless $2.empty? }}#{timestamp}"
         )
       end
 
@@ -90,8 +90,10 @@ module Apache
       #   # 30 seconds later...
       #   secure_url(s, "/secure/url", :offset => 60) #=> "/secure/url?timestamp=1204024740&token=c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8"
       def secure_url(secret, url, expires = Time.now + 60)
-        path, _, query = URI.split(url)[5..7]
+        path, query, fragment = URI.split(url).values_at(5, 7, 8)
+
         path << '?' << query if query
+        url = url[/(.*?)#/, 1] if fragment
 
         if expires.is_a?(Hash)
           timestamp = (expires[:expires] || Time.now + (expires[:offset] ||= 60)).to_i
@@ -104,7 +106,7 @@ module Apache
           timestamp = expires.to_i
         end
 
-        url + "#{query ? '&' : '?'}timestamp=#{timestamp}&token=#{token(secret, path, timestamp)}"
+        "#{url}#{query ? '&' : '?'}timestamp=#{timestamp}&token=#{token(secret, path, timestamp)}#{"##{fragment}" if fragment}"
       end
 
     end

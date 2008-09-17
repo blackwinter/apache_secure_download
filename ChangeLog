@@ -1,5 +1,10 @@
 = Revision history for apache_secure_download
 
+== 0.0.8 [2008-09-17]
+
+* Some (minor) refactoring
+* Account for URI fragment in Apache::SecureDownload::Util.secure_url
+
 == 0.0.7 [2008-03-31]
 
 * Fixed that token wouldn't respect query string when it should

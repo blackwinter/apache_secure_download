@@ -53,17 +53,21 @@ module Apache
     # 2. The token is valid for the requested URL and the given timestamp
     #
     # If either condition doesn't hold true, access to the requested resource
-    # is forbidden!
+    # is denied!
     def check_access(request)
-      return FORBIDDEN if @deny  && request.uri =~ @deny
-      return OK        if @allow && request.uri =~ @allow
+      uri, timestamp = request.uri, request.param('timestamp')
 
-      timestamp = request.param('timestamp')
-
-      return FORBIDDEN if timestamp.to_i < Time.now.to_i
-      return FORBIDDEN if request.param('token') != Util.token(@secret, request.unparsed_uri, timestamp)
-
-      return OK
+      if (@deny  && uri =~ @deny)  || (
+        !(@allow && uri =~ @allow) && (
+          timestamp.to_i < Time.now.to_i || request.param('token') != Util.token(
+            @secret, request.unparsed_uri, timestamp
+          )
+        )
+      )
+        return FORBIDDEN
+      else
+        return OK
+      end
     end
 
   end
