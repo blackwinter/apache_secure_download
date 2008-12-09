@@ -47,9 +47,11 @@ See Apache::SecureDownload::Util.secure_url for more examples.
 
 == LINKS
 
-* <http://prometheus.rubyforge.org/apache_secure_download>
-* <http://prometheus.rubyforge.org/svn/scratch/apache_secure_download>
-* <http://github.com/blackwinter/apache_secure_download>
+<b></b>
+Documentation::     <http://prometheus.rubyforge.org/apache_secure_download>
+Source code (old):: <http://prometheus.rubyforge.org/svn/scratch/apache_secure_download>
+Source code::       <http://github.com/blackwinter/apache_secure_download>
+Rubyforge project:: <http://rubyforge.org/projects/prometheus>
 
 
 == AUTHORS
