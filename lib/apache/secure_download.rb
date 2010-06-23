@@ -4,9 +4,9 @@
 # apache_secure_download -- Apache module providing secure downloading        #
 #                           functionality                                     #
 #                                                                             #
-# Copyright (C) 2008 University of Cologne,                                   #
-#                    Albertus-Magnus-Platz,                                   #
-#                    50923 Cologne, Germany                                   #
+# Copyright (C) 2008-2010 University of Cologne,                              #
+#                         Albertus-Magnus-Platz,                              #
+#                         50923 Cologne, Germany                              #
 #                                                                             #
 # Authors:                                                                    #
 #     Jens Wille <jens.wille@uni-koeln.de>                                    #
@@ -27,7 +27,6 @@
 ###############################################################################
 #++
 
-require 'rubygems'
 require 'apache/secure_download/util'
 
 module Apache
@@ -38,11 +37,9 @@ module Apache
     # The argument +secret+ is the shared secret string that the application
     # uses to create valid URLs (tokens).
     def initialize(secret, options = {})
-      @secret = secret
-      @deny   = options[:deny]
-      @allow  = options[:allow]
+      @secret, @deny, @allow = secret, *options.values_at(:deny, :allow)
 
-      raise ArgumentError, 'secret string missing'  unless @secret.is_a?(String)
+      raise ArgumentError, 'secret is missing'      unless @secret.is_a?(String)
       raise ArgumentError, ':deny is not a regexp'  unless @deny.nil?  || @deny.is_a?(Regexp)
       raise ArgumentError, ':allow is not a regexp' unless @allow.nil? || @allow.is_a?(Regexp)
     end
@@ -55,19 +52,18 @@ module Apache
     # If either condition doesn't hold true, access to the requested resource
     # is denied!
     def check_access(request)
-      uri, timestamp = request.uri, request.param('timestamp')
+      timestamp, token = request.param('timestamp'), request.param('token')
 
-      if (@deny  && uri =~ @deny)  || (
-        !(@allow && uri =~ @allow) && (
-          timestamp.to_i < Time.now.to_i || request.param('token') != Util.token(
-            @secret, request.unparsed_uri, timestamp
-          )
-        )
-      )
-        return FORBIDDEN
-      else
-        return OK
-      end
+      # Remove timestamp and token from query args
+      request.args = Util.real_query(request.args)
+
+      return FORBIDDEN if @deny  && request.uri =~ @deny
+      return OK        if @allow && request.uri =~ @allow
+
+      return FORBIDDEN if timestamp.to_i < Time.now.to_i
+      return FORBIDDEN if token != Util.token(@secret, request.unparsed_uri, timestamp)
+
+      return OK
     end
 
   end

@@ -3,9 +3,9 @@
 #                                                                             #
 # A component of apache_secure_download.                                      #
 #                                                                             #
-# Copyright (C) 2008 University of Cologne,                                   #
-#                    Albertus-Magnus-Platz,                                   #
-#                    50923 Cologne, Germany                                   #
+# Copyright (C) 2008-2010 University of Cologne,                              #
+#                         Albertus-Magnus-Platz,                              #
+#                         50923 Cologne, Germany                              #
 #                                                                             #
 # Authors:                                                                    #
 #     Jens Wille <jens.wille@uni-koeln.de>                                    #
@@ -36,15 +36,6 @@ module Apache
     module Util
 
       extend self
-
-      QUERY_RE = %r{([?&])timestamp=.*?&token=.*?(&|\z)}o
-
-      # Computes the token from +secret+, +path+, and +timestamp+.
-      def token(secret, path, timestamp)
-        Digest::SHA1.hexdigest(
-          "#{secret}#{path.sub(QUERY_RE) { $1 unless $2.empty? }}#{timestamp}"
-        )
-      end
 
       # Creates a valid URL to the secured resource, identified by +url+. The
       # argument +secret+ is the shared secret string that has been passed to
@@ -90,23 +81,57 @@ module Apache
       #   # 30 seconds later...
       #   secure_url(s, "/secure/url", :offset => 60) #=> "/secure/url?timestamp=1204024740&token=c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8"
       def secure_url(secret, url, expires = Time.now + 60)
-        path, query, fragment = URI.split(url).values_at(5, 7, 8)
-
-        path << '?' << query if query
-        url = url[/(.*?)#/, 1] if fragment
-
         if expires.is_a?(Hash)
-          timestamp = (expires[:expires] || Time.now + (expires[:offset] ||= 60)).to_i
+          expires[:offset] ||= 60
+          cache = expires[:cache] || expires[:offset]
 
-          unless expires[:cache] == false || (cache = expires[:cache] || expires[:offset]).zero?
-            # makes the URL cacheable for +cache+ seconds *on average*
+          timestamp = (expires[:expires] || Time.now + expires[:offset]).to_i
+
+          unless cache == false || cache.zero?
+            # make the URL cacheable for +cache+ seconds *on average*
             timestamp = ((timestamp / cache.to_f).round + 1) * cache.to_i
           end
         else
           timestamp = expires.to_i
         end
 
-        "#{url}#{query ? '&' : '?'}timestamp=#{timestamp}&token=#{token(secret, path, timestamp)}#{"##{fragment}" if fragment}"
+        path, query = URI.split(url).values_at(5, 7)
+        path << '?' << query if query
+
+        params = "timestamp=#{timestamp}&token=#{token(secret, path, timestamp)}"
+
+        url.sub(/#|\z/, "#{query ? '&' : '?'}#{params}\\&")
+      end
+
+      # Computes the token from +secret+, +path+, and +timestamp+.
+      def token(secret, path, timestamp)
+        Digest::SHA1.hexdigest("#{secret}#{real_path(path)}#{timestamp}")
+      end
+
+      # Returns +path+ with timestamp and token parameters removed.
+      def real_path(path)
+        clean(path, :path)
+      end
+
+      # Returns +query+ with timestamp and token parameters removed.
+      def real_query(query)
+        clean(query, :query)
+      end
+
+      private
+
+      # Returns +string+ with timestamp and token parameters removed.
+      # The +type+ indicates whether it's a _path_ or a _query_.
+      def clean(string, type)
+        char = case type
+          when :path  then '\?'
+          when :query then '\A'
+          else raise ArgumentError, "type #{type.inspect} not supported"
+        end
+
+        %w[timestamp token].inject(string) { |memo, key|
+          memo.sub(/(#{char}|&)#{key}=[^&]*(&?)/) { $1 unless $2.empty? }
+        }
       end
 
     end
