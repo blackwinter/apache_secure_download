@@ -1,5 +1,10 @@
 = Revision history for apache_secure_download
 
+== 0.1.0 [2010-06-24]
+
+* Fixed regression from 0.0.9
+* Added specs
+
 == 0.0.9 [2010-06-23]
 
 * Remove timestamp and token from query args
