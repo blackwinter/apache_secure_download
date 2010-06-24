@@ -87,7 +87,7 @@ module Apache
 
           timestamp = (expires[:expires] || Time.now + expires[:offset]).to_i
 
-          unless cache == false || cache.zero?
+          unless expires[:cache] == false || cache.zero?
             # make the URL cacheable for +cache+ seconds *on average*
             timestamp = ((timestamp / cache.to_f).round + 1) * cache.to_i
           end
