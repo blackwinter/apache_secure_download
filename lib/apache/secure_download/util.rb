@@ -54,32 +54,32 @@ module Apache
       # Examples (<tt>s = "secret"</tt>):
       #
       #   # Only the path component (and an optional query component) will be taken into account
-      #   secure_url(s, "/secure/url")                    #=> "/secure/url?timestamp=1204024618&token=4dd9ebe9d3c9bc0efbeea7e1ee453a8c41d5e04d"
-      #   secure_url(s, "http://example.com/secure/url")  #=> "http://example.com/secure/url?timestamp=1204024618&token=4dd9ebe9d3c9bc0efbeea7e1ee453a8c41d5e04d"
-      #   secure_url(s, "/secure/url?query=value")        #=> "/secure/url?query=value&timestamp=1204024618&token=4732b30f5899821426bd0c15da363c60cc4f943b"
+      #   secure_url(s, "/secure/url")                    #=> "/secure/url?timestamp=1204024678&token=5671a9b3966e8bbed91fc0bb5594d576c504cdf0"
+      #   secure_url(s, "http://example.com/secure/url")  #=> "http://example.com/secure/url?timestamp=1204024678&token=5671a9b3966e8bbed91fc0bb5594d576c504cdf0"
+      #   secure_url(s, "/secure/url?query=value")        #=> "/secure/url?query=value&timestamp=1204024678&token=b482f943c35f4a1b5da6c646df6a65c0edc364cf"
       #
       #   # Expires in 10 minutes
-      #   secure_url(s, "/secure/url", Time.now + 600)  #=> "/secure/url?timestamp=1204025158&token=efefcd93f8065836cf576b34e1849075c3d56bbf"
+      #   secure_url(s, "/secure/url", Time.now + 600)  #=> "/secure/url?timestamp=1204025218&token=7e51f91cf4406f308a8df24f4e2cbf188de3c1bf"
       #   secure_url(s, "/secure/url", :offset => 600)  #=> "/secure/url?timestamp=1204026000&token=58eb12f9fc3fcd984fe4e918d3fd0590392c172d"
       #
       #   # Setting an offset will also allow caching; turn it off explicitly
-      #   secure_url(s, "/secure/url", :offset => 600, :cache => false)  #=> "/secure/url?timestamp=1204025158&token=efefcd93f8065836cf576b34e1849075c3d56bbf"
+      #   secure_url(s, "/secure/url", :offset => 600, :cache => false)  #=> "/secure/url?timestamp=1204025218&token=7e51f91cf4406f308a8df24f4e2cbf188de3c1bf"
       #
       #   # Produce identical URLs for a window of 1 minute (on average)
       #   t = Time.now
-      #   secure_url(s, "/secure/url", :expires => t,      :cache => 60)  #=> "/secure/url?timestamp=1204024620&token=d4f9145f45c5826b50506c770cc204e22c3b7a21"
-      #   secure_url(s, "/secure/url", :expires => t + 30, :cache => 60)  #=> "/secure/url?timestamp=1204024620&token=d4f9145f45c5826b50506c770cc204e22c3b7a21"
-      #   secure_url(s, "/secure/url", :expires => t + 60, :cache => 60)  #=> "/secure/url?timestamp=1204024680&token=ccf279daf1787d34ad063cbf5851ee88aae967fb"
-      #   secure_url(s, "/secure/url", :expires => t + 90, :cache => 60)  #=> "/secure/url?timestamp=1204024680&token=ccf279daf1787d34ad063cbf5851ee88aae967fb"
+      #   secure_url(s, "/secure/url", :expires => t,      :cache => 60)  #=> "/secure/url?timestamp=1204024680&token=ccf279daf1787d34ad063cbf5851ee88aae967fb"
+      #   secure_url(s, "/secure/url", :expires => t + 30, :cache => 60)  #=> "/secure/url?timestamp=1204024680&token=ccf279daf1787d34ad063cbf5851ee88aae967fb"
+      #   secure_url(s, "/secure/url", :expires => t + 60, :cache => 60)  #=> "/secure/url?timestamp=1204024740&token=c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8"
+      #   secure_url(s, "/secure/url", :expires => t + 90, :cache => 60)  #=> "/secure/url?timestamp=1204024740&token=c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8"
       #
       #   # Same as before, but use offset
-      #   secure_url(s, "/secure/url", :offset => 60) #=> "/secure/url?timestamp=1204024680&token=ccf279daf1787d34ad063cbf5851ee88aae967fb"
-      #   # 30 seconds later...
-      #   secure_url(s, "/secure/url", :offset => 60) #=> "/secure/url?timestamp=1204024680&token=ccf279daf1787d34ad063cbf5851ee88aae967fb"
-      #   # 30 seconds later...
       #   secure_url(s, "/secure/url", :offset => 60) #=> "/secure/url?timestamp=1204024740&token=c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8"
       #   # 30 seconds later...
       #   secure_url(s, "/secure/url", :offset => 60) #=> "/secure/url?timestamp=1204024740&token=c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8"
+      #   # 30 seconds later...
+      #   secure_url(s, "/secure/url", :offset => 60) #=> "/secure/url?timestamp=1204024800&token=aa11618f1cc0883a29e9239b777ca53dfc4d9604"
+      #   # 30 seconds later...
+      #   secure_url(s, "/secure/url", :offset => 60) #=> "/secure/url?timestamp=1204024800&token=aa11618f1cc0883a29e9239b777ca53dfc4d9604"
       def secure_url(secret, url, expires = Time.now + 60)
         if expires.is_a?(Hash)
           expires[:offset] ||= 60
