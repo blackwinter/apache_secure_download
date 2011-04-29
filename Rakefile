@@ -20,3 +20,9 @@ rescue LoadError => err
   warn "Please install the `hen' gem. (#{err})"
 end
 
+desc "Run benchmarks"
+task :bench do
+  Dir["#{File.dirname(__FILE__)}/bench/**/*_bench.rb"].each { |bench|
+    load bench, true
+  }
+end
