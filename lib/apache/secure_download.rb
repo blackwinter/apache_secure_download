@@ -56,7 +56,7 @@ module Apache
       timestamp, token = request.param('timestamp'), request.param('token')
 
       # Remove timestamp and token from query args
-      request.args = Util.real_query(request.args)
+      request.args &&= Util.real_query(request.args)
 
       return FORBIDDEN if @deny  && request.uri =~ @deny
       return OK        if @allow && request.uri =~ @allow
