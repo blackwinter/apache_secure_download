@@ -78,7 +78,7 @@ describe Apache::SecureDownload do
       @handler = @class.new(@secret)
     end
 
-    describe "normally", :shared => true do
+    shared_examples "normally" do
 
       it_should_be_allowed "with correct secret"
 
@@ -100,7 +100,7 @@ describe Apache::SecureDownload do
 
     end
 
-    describe "always allowed", :shared => true do
+    shared_examples "always allowed" do
 
       it_should_be_allowed "with correct secret"
 
@@ -122,7 +122,7 @@ describe Apache::SecureDownload do
 
     end
 
-    describe "always forbidden", :shared => true do
+    shared_examples "always forbidden" do
 
       it_should_be_forbidden "with correct secret"
 
