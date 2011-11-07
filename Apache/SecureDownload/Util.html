@@ -1,286 +1,270 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+
+<html>
 <head>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-  <title>Module: Apache::SecureDownload::Util</title>
+<title>Module: Apache::SecureDownload::Util</title>
 
-  <link rel="stylesheet" href="../../rdoc.css" type="text/css" media="screen" />
+<link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
-  <script src="../../js/jquery.js" type="text/javascript" charset="utf-8"></script>
-  <script src="../../js/thickbox-compressed.js" type="text/javascript" charset="utf-8"></script>
-  <script src="../../js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
-  <script src="../../js/darkfish.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
 
-</head>
+<script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/darkfish.js"></script>
+
+
 <body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../../index.html">Home</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
 
-  <div id="metadata">
-    <div id="home-metadata">
-      <div id="home-section" class="section">
-        <h3 class="section-header">
-          <a href="../../index.html">Home</a>
-          <a href="../../index.html#classes">Classes</a>
-          <a href="../../index.html#methods">Methods</a>
-        </h3>
-      </div>
-    </div>
 
-    <div id="file-metadata">
-      <div id="file-list-section" class="section">
-        <h3 class="section-header">In Files</h3>
-        <div class="section-body">
-          <ul>
-          
-            <li><a href="../../lib/apache/secure_download/util_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-              class="thickbox" title="lib/apache/secure_download/util.rb">lib/apache/secure_download/util.rb</a></li>
-          
-          </ul>
-        </div>
-      </div>
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
 
-      
-    </div>
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
 
-    <div id="class-metadata">
-      
 
-      
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/apache/secure_download/util.rb
+  </ul>
+</nav>
 
-      
-
-      
-      <!-- Method Quickref -->
-      <div id="method-list-section" class="section">
-        <h3 class="section-header">Methods</h3>
-        <ul class="link-list">
-          
-          <li><a href="#method-i-clean">#clean</a></li>
-          
-          <li><a href="#method-i-real_path">#real_path</a></li>
-          
-          <li><a href="#method-i-real_query">#real_query</a></li>
-          
-          <li><a href="#method-i-secure_url">#secure_url</a></li>
-          
-          <li><a href="#method-i-token">#token</a></li>
-          
-        </ul>
-      </div>
-      
-
-      
-    </div>
-
-    <div id="project-metadata">
-      
-      
-      <div id="fileindex-section" class="section project-section">
-        <h3 class="section-header">Files</h3>
-        <ul>
-        
-          <li class="file"><a href="../../COPYING.html">COPYING</a></li>
-        
-          <li class="file"><a href="../../ChangeLog.html">ChangeLog</a></li>
-        
-          <li class="file"><a href="../../README.html">README</a></li>
-        
-        </ul>
-      </div>
-      
-
-      <div id="classindex-section" class="section project-section">
-        <h3 class="section-header">Class/Module Index
-          <span class="search-toggle"><img src="../../images/find.png"
-            height="16" width="16" alt="[+]"
-            title="show/hide quicksearch" /></span></h3>
-        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
-        <fieldset>
-          <legend>Quicksearch</legend>
-          <input type="text" name="quicksearch" value=""
-            class="quicksearch-field" />
-        </fieldset>
-        </form>
-
-        <ul class="link-list">
-        
-          <li><a href="../../Apache.html">Apache</a></li>
-        
-          <li><a href="../../Apache/SecureDownload.html">Apache::SecureDownload</a></li>
-        
-          <li><a href="../../Apache/SecureDownload/Util.html">Apache::SecureDownload::Util</a></li>
-        
-          <li><a href="../../Apache/SecureDownload/Version.html">Apache::SecureDownload::Version</a></li>
-        
-        </ul>
-        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
-      </div>
-
-      
-    </div>
+    
   </div>
 
-  <div id="documentation">
-    <h1 class="module">Apache::SecureDownload::Util</h1>
-
-    <div id="description" class="description">
-      
-    </div><!-- description -->
-
+  <div id="class-metadata">
     
     
     
-    <div id="5Buntitled-5D" class="documentation-section">
-      
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
 
-      
+  <ul class="link-list">
+    
+    <li><a href="#method-i-clean">#clean</a>
+    
+    <li><a href="#method-i-real_path">#real_path</a>
+    
+    <li><a href="#method-i-real_query">#real_query</a>
+    
+    <li><a href="#method-i-secure_url">#secure_url</a>
+    
+    <li><a href="#method-i-token">#token</a>
+    
+  </ul>
+</nav>
 
-      
+  </div>
 
-      
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
 
-      <!-- Methods -->
-      
-      <div id="public-instance-method-details" class="method-section section">
-        <h3 class="section-header">Public Instance Methods</h3>
+  <ul>
+  
+    <li class="file"><a href="../../COPYING.html">COPYING</a>
+  
+    <li class="file"><a href="../../ChangeLog.html">ChangeLog</a>
+  
+    <li class="file"><a href="../../README.html">README</a>
+  
+  </ul>
+</nav>
 
-      
-        <div id="real_path-method" class="method-detail ">
-          <a name="method-i-real_path"></a>
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../../Apache.html">Apache</a>
+  
+    <li><a href="../../Apache/SecureDownload.html">Apache::SecureDownload</a>
+  
+    <li><a href="../../Apache/SecureDownload/Util.html">Apache::SecureDownload::Util</a>
+  
+    <li><a href="../../Apache/SecureDownload/Version.html">Apache::SecureDownload::Version</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module Apache::SecureDownload::Util</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-real_path" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">real_path</span><span
+            class="method-args">(path)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns <code>path</code> with timestamp and token parameters removed.</p>
+          
 
           
-          <div class="method-heading">
-            <span class="method-name">real_path</span><span
-              class="method-args">(path)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Returns <tt>path</tt> with timestamp and token parameters removed.</p>
-            
-
-            
-            <div class="method-source-code" id="real_path-source">
-<pre>
-<span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 113</span>
+          <div class="method-source-code" id="real_path-source">
+            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 113</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">real_path</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-identifier">clean</span>(<span class="ruby-identifier">path</span>, <span class="ruby-value">:path</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- real_path-source -->
-            
-          </div>
+          </div><!-- real_path-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- real_path-method -->
+
+    
+      <div id="method-i-real_query" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">real_query</span><span
+            class="method-args">(query)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns <code>query</code> with timestamp and token parameters removed.</p>
           
 
           
-        </div><!-- real_path-method -->
-
-      
-        <div id="real_query-method" class="method-detail ">
-          <a name="method-i-real_query"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">real_query</span><span
-              class="method-args">(query)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Returns <tt>query</tt> with timestamp and token parameters removed.</p>
-            
-
-            
-            <div class="method-source-code" id="real_query-source">
-<pre>
-<span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 118</span>
+          <div class="method-source-code" id="real_query-source">
+            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">real_query</span>(<span class="ruby-identifier">query</span>)
   <span class="ruby-identifier">clean</span>(<span class="ruby-identifier">query</span>, <span class="ruby-value">:query</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- real_query-source -->
-            
-          </div>
-
+          </div><!-- real_query-source -->
           
+        </div>
 
+        
+
+        
+      </div><!-- real_query-method -->
+
+    
+      <div id="method-i-secure_url" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">secure_url</span><span
+            class="method-args">(secret, url, expires = Time.now + 60)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
           
-        </div><!-- real_query-method -->
-
-      
-        <div id="secure_url-method" class="method-detail ">
-          <a name="method-i-secure_url"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">secure_url</span><span
-              class="method-args">(secret, url, expires = Time.now + 60)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Creates a valid URL to the secured resource, identified by <tt>url</tt>.
-The argument <tt>secret</tt> is the shared secret string that has been
-passed to the relevant RubyAccessHandler instance (cf. <a
-href="../SecureDownload.html#method-c-new">SecureDownload.new</a>).</p>
+          <p>Creates a valid URL to the secured resource, identified by
+<code>url</code>. The argument <code>secret</code> is the shared secret
+string that has been passed to the relevant RubyAccessHandler instance (cf.
+<a
+href="../SecureDownload.html#method-c-new">Apache::SecureDownload.new</a>).</p>
 
 <p>The expiration time may be either given as a Time (or Integer), or as a
 Hash with the following parameters:</p>
-<table class="rdoc-list"><tr><td class="rdoc-term"><p><tt>:expires</tt></p></td>
-<td>
-<p>Same as for the simple <tt>expires</tt> argument</p>
-</td></tr><tr><td class="rdoc-term"><p><tt>:offset</tt></p></td>
-<td>
-<p>The amount of seconds in the future (only if <tt>:expires</tt> is not
+<dl class="rdoc-list note-list"><dt><code>:expires</code>
+<dd>
+<p>Same as for the simple <code>expires</code> argument</p>
+</dd><dt><code>:offset</code>
+<dd>
+<p>The amount of seconds in the future (only if <code>:expires</code> is not
 given)</p>
-</td></tr><tr><td class="rdoc-term"><p><tt>:cache</tt></p></td>
-<td>
+</dd><dt><code>:cache</code>
+<dd>
 <p>A time window for which identical URLs shall be produced, on average
-(defaults to <tt>:offset</tt>, if given)</p>
-</td></tr></table>
+(defaults to <code>:offset</code>, if given)</p>
+</dd></dl>
 
-<p>Examples (<tt>s = &quot;secret&quot;</tt>):</p>
+<p>Examples (<code>s = &quot;secret&quot;</code>):</p>
 
-<pre># Only the path component (and an optional query component) will be taken into account
-secure_url(s, &quot;/secure/url&quot;)                    #=&gt; &quot;/secure/url?timestamp=1204024678&amp;token=5671a9b3966e8bbed91fc0bb5594d576c504cdf0&quot;
-secure_url(s, &quot;http://example.com/secure/url&quot;)  #=&gt; &quot;http://example.com/secure/url?timestamp=1204024678&amp;token=5671a9b3966e8bbed91fc0bb5594d576c504cdf0&quot;
-secure_url(s, &quot;/secure/url?query=value&quot;)        #=&gt; &quot;/secure/url?query=value&amp;timestamp=1204024678&amp;token=b482f943c35f4a1b5da6c646df6a65c0edc364cf&quot;
+<pre class="ruby"><span class="ruby-comment"># Only the path component (and an optional query component) will be taken into account</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>)                    <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204024678&amp;token=5671a9b3966e8bbed91fc0bb5594d576c504cdf0&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;http://example.com/secure/url&quot;</span>)  <span class="ruby-comment">#=&gt; &quot;http://example.com/secure/url?timestamp=1204024678&amp;token=5671a9b3966e8bbed91fc0bb5594d576c504cdf0&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url?query=value&quot;</span>)        <span class="ruby-comment">#=&gt; &quot;/secure/url?query=value&amp;timestamp=1204024678&amp;token=b482f943c35f4a1b5da6c646df6a65c0edc364cf&quot;</span>
 
-# Expires in 10 minutes
-secure_url(s, &quot;/secure/url&quot;, Time.now + 600)  #=&gt; &quot;/secure/url?timestamp=1204025218&amp;token=7e51f91cf4406f308a8df24f4e2cbf188de3c1bf&quot;
-secure_url(s, &quot;/secure/url&quot;, :offset =&gt; 600)  #=&gt; &quot;/secure/url?timestamp=1204026000&amp;token=58eb12f9fc3fcd984fe4e918d3fd0590392c172d&quot;
+<span class="ruby-comment"># Expires in 10 minutes</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">+</span> <span class="ruby-value">600</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204025218&amp;token=7e51f91cf4406f308a8df24f4e2cbf188de3c1bf&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">600</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204026000&amp;token=58eb12f9fc3fcd984fe4e918d3fd0590392c172d&quot;</span>
 
-# Setting an offset will also allow caching; turn it off explicitly
-secure_url(s, &quot;/secure/url&quot;, :offset =&gt; 600, :cache =&gt; false)  #=&gt; &quot;/secure/url?timestamp=1204025218&amp;token=7e51f91cf4406f308a8df24f4e2cbf188de3c1bf&quot;
+<span class="ruby-comment"># Setting an offset will also allow caching; turn it off explicitly</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">600</span>, :<span class="ruby-identifier">cache</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204025218&amp;token=7e51f91cf4406f308a8df24f4e2cbf188de3c1bf&quot;</span>
 
-# Produce identical URLs for a window of 1 minute (on average)
-t = Time.now
-secure_url(s, &quot;/secure/url&quot;, :expires =&gt; t,      :cache =&gt; 60)  #=&gt; &quot;/secure/url?timestamp=1204024680&amp;token=ccf279daf1787d34ad063cbf5851ee88aae967fb&quot;
-secure_url(s, &quot;/secure/url&quot;, :expires =&gt; t + 30, :cache =&gt; 60)  #=&gt; &quot;/secure/url?timestamp=1204024680&amp;token=ccf279daf1787d34ad063cbf5851ee88aae967fb&quot;
-secure_url(s, &quot;/secure/url&quot;, :expires =&gt; t + 60, :cache =&gt; 60)  #=&gt; &quot;/secure/url?timestamp=1204024740&amp;token=c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8&quot;
-secure_url(s, &quot;/secure/url&quot;, :expires =&gt; t + 90, :cache =&gt; 60)  #=&gt; &quot;/secure/url?timestamp=1204024740&amp;token=c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8&quot;
+<span class="ruby-comment"># Produce identical URLs for a window of 1 minute (on average)</span>
+<span class="ruby-identifier">t</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">expires</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">t</span>,      :<span class="ruby-identifier">cache</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204024680&amp;token=ccf279daf1787d34ad063cbf5851ee88aae967fb&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">expires</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">+</span> <span class="ruby-value">30</span>, :<span class="ruby-identifier">cache</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204024680&amp;token=ccf279daf1787d34ad063cbf5851ee88aae967fb&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">expires</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">+</span> <span class="ruby-value">60</span>, :<span class="ruby-identifier">cache</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204024740&amp;token=c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">expires</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">+</span> <span class="ruby-value">90</span>, :<span class="ruby-identifier">cache</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204024740&amp;token=c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8&quot;</span>
 
-# Same as before, but use offset
-secure_url(s, &quot;/secure/url&quot;, :offset =&gt; 60) #=&gt; &quot;/secure/url?timestamp=1204024740&amp;token=c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8&quot;
-# 30 seconds later...
-secure_url(s, &quot;/secure/url&quot;, :offset =&gt; 60) #=&gt; &quot;/secure/url?timestamp=1204024740&amp;token=c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8&quot;
-# 30 seconds later...
-secure_url(s, &quot;/secure/url&quot;, :offset =&gt; 60) #=&gt; &quot;/secure/url?timestamp=1204024800&amp;token=aa11618f1cc0883a29e9239b777ca53dfc4d9604&quot;
-# 30 seconds later...
-secure_url(s, &quot;/secure/url&quot;, :offset =&gt; 60) #=&gt; &quot;/secure/url?timestamp=1204024800&amp;token=aa11618f1cc0883a29e9239b777ca53dfc4d9604&quot;</pre>
-            
+<span class="ruby-comment"># Same as before, but use offset</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>) <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204024740&amp;token=c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8&quot;</span>
+<span class="ruby-comment"># 30 seconds later...</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>) <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204024740&amp;token=c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8&quot;</span>
+<span class="ruby-comment"># 30 seconds later...</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>) <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204024800&amp;token=aa11618f1cc0883a29e9239b777ca53dfc4d9604&quot;</span>
+<span class="ruby-comment"># 30 seconds later...</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>) <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204024800&amp;token=aa11618f1cc0883a29e9239b777ca53dfc4d9604&quot;</span>
+</pre>
+          
 
-            
-            <div class="method-source-code" id="secure_url-source">
-<pre>
-<span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 84</span>
+          
+          <div class="method-source-code" id="secure_url-source">
+            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">secret</span>, <span class="ruby-identifier">url</span>, <span class="ruby-identifier">expires</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">+</span> <span class="ruby-value">60</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">expires</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
     <span class="ruby-identifier">expires</span>[<span class="ruby-value">:offset</span>] <span class="ruby-operator">||=</span> <span class="ruby-value">60</span>
@@ -296,84 +280,79 @@ secure_url(s, &quot;/secure/url&quot;, :offset =&gt; 60) #=&gt; &quot;/secure/ur
     <span class="ruby-identifier">timestamp</span> = <span class="ruby-identifier">expires</span>.<span class="ruby-identifier">to_i</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">path</span>, <span class="ruby-identifier">query</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">url</span>).<span class="ruby-identifier">values_at</span>(<span class="ruby-value">5</span>, <span class="ruby-value">7</span>)
+  <span class="ruby-identifier">path</span>, <span class="ruby-identifier">query</span> = <span class="ruby-identifier">url</span>[<span class="ruby-value">0</span>, <span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">'/'</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">'?'</span>, <span class="ruby-value">2</span>) <span class="ruby-operator">:</span> <span class="ruby-constant">URI</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">url</span>).<span class="ruby-identifier">values_at</span>(<span class="ruby-value">5</span>, <span class="ruby-value">7</span>)
   <span class="ruby-identifier">path</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'?'</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">query</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">query</span>
 
   <span class="ruby-identifier">params</span> = <span class="ruby-node">&quot;timestamp=#{timestamp}&amp;token=#{token(secret, path, timestamp)}&quot;</span>
 
   <span class="ruby-identifier">url</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/#|\z/</span>, <span class="ruby-node">&quot;#{query ? '&amp;' : '?'}#{params}\\&amp;&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- secure_url-source -->
-            
-          </div>
+          </div><!-- secure_url-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- secure_url-method -->
+
+    
+      <div id="method-i-token" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">token</span><span
+            class="method-args">(secret, path, timestamp)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Computes the token from <code>secret</code>, <code>path</code>, and
+<code>timestamp</code>.</p>
           
 
           
-        </div><!-- secure_url-method -->
-
-      
-        <div id="token-method" class="method-detail ">
-          <a name="method-i-token"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">token</span><span
-              class="method-args">(secret, path, timestamp)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Computes the token from <tt>secret</tt>, <tt>path</tt>, and
-<tt>timestamp</tt>.</p>
-            
-
-            
-            <div class="method-source-code" id="token-source">
-<pre>
-<span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 108</span>
+          <div class="method-source-code" id="token-source">
+            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 108</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">token</span>(<span class="ruby-identifier">secret</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">timestamp</span>)
   <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-node">&quot;#{secret}#{real_path(path)}#{timestamp}&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- token-source -->
-            
-          </div>
-
+          </div><!-- token-source -->
           
+        </div>
 
-          
-        </div><!-- token-method -->
+        
 
-      
-      </div><!-- public-instance-method-details -->
+        
+      </div><!-- token-method -->
+
     
-      <div id="private-instance-method-details" class="method-section section">
-        <h3 class="section-header">Private Instance Methods</h3>
+    </section><!-- public-instance-method-details -->
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
 
-      
-        <div id="clean-method" class="method-detail ">
-          <a name="method-i-clean"></a>
+    
+      <div id="method-i-clean" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">clean</span><span
+            class="method-args">(string, type)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns <code>string</code> with timestamp and token parameters removed.
+The <code>type</code> indicates whether it’s a <em>path</em> or a
+<em>query</em>.</p>
+          
 
           
-          <div class="method-heading">
-            <span class="method-name">clean</span><span
-              class="method-args">(string, type)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Returns <tt>string</tt> with timestamp and token parameters removed. The
-<tt>type</tt> indicates whether it’s a <em>path</em> or a <em>query</em>.</p>
-            
-
-            
-            <div class="method-source-code" id="clean-source">
-<pre>
-<span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 126</span>
+          <div class="method-source-code" id="clean-source">
+            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 126</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">clean</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">type</span>)
   <span class="ruby-identifier">char</span> = <span class="ruby-keyword">case</span> <span class="ruby-identifier">type</span>
     <span class="ruby-keyword">when</span> <span class="ruby-value">:path</span>  <span class="ruby-keyword">then</span> <span class="ruby-string">'\?'</span>
@@ -385,29 +364,26 @@ secure_url(s, &quot;/secure/url&quot;, :offset =&gt; 60) #=&gt; &quot;/secure/ur
     <span class="ruby-identifier">memo</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/(#{char}|&amp;)#{key}=[^&amp;]*(&amp;?)/</span>) { <span class="ruby-node">$1</span> <span class="ruby-keyword">unless</span> <span class="ruby-node">$2</span>.<span class="ruby-identifier">empty?</span> }
   }
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- clean-source -->
-            
-          </div>
-
+          </div><!-- clean-source -->
           
+        </div>
 
-          
-        </div><!-- clean-method -->
+        
 
-      
-      </div><!-- private-instance-method-details -->
+        
+      </div><!-- clean-method -->
+
     
-    </div><!-- 5Buntitled-5D -->
+    </section><!-- private-instance-method-details -->
   
+  </section><!-- 5Buntitled-5D -->
 
-  </div><!-- documentation -->
+</div><!-- documentation -->
 
-  <div id="validator-badges">
-    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
-    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
-      Rdoc Generator</a> 2</small>.</p>
-  </div>
 
-</body>
-</html>
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
 

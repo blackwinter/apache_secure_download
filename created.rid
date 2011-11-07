@@ -1,8 +1,8 @@
-Thu, 29 Sep 2011 16:18:19 +0200
+Mon, 07 Nov 2011 12:29:08 +0100
 lib/apache/mock_constants.rb	Thu, 24 Jun 2010 14:49:19 +0200
 COPYING	Fri, 29 Apr 2011 12:10:39 +0200
-lib/apache/secure_download.rb	Thu, 29 Sep 2011 16:13:45 +0200
-README	Thu, 29 Sep 2011 16:16:25 +0200
-lib/apache/secure_download/version.rb	Thu, 29 Sep 2011 16:16:32 +0200
-lib/apache/secure_download/util.rb	Fri, 29 Apr 2011 12:08:02 +0200
+lib/apache/secure_download.rb	Thu, 27 Oct 2011 18:21:11 +0200
+README	Mon, 07 Nov 2011 12:28:28 +0100
+lib/apache/secure_download/version.rb	Mon, 07 Nov 2011 12:28:35 +0100
+lib/apache/secure_download/util.rb	Mon, 07 Nov 2011 12:23:53 +0100
 ChangeLog	Thu, 29 Sep 2011 16:17:55 +0200
