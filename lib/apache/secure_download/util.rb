@@ -96,7 +96,7 @@ module Apache
           timestamp = expires.to_i
         end
 
-        path, query = URI.split(url).values_at(5, 7)
+        path, query = url[0, 1] == '/' ? url.split('?', 2) : URI.split(url).values_at(5, 7)
         path << '?' << query if query
 
         params = "timestamp=#{timestamp}&token=#{token(secret, path, timestamp)}"
