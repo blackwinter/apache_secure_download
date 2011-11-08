@@ -238,15 +238,16 @@ describe Apache::SecureDownload do
     end
 
     def mock_request
-      args = "timestamp=#{@timestamp}&token=#{@token}"
+      _asd = "#{'%010x' % @timestamp}#{@token}"
+
+      args = "_asd=#{_asd}"
       args = "#{@args}&#{args}" if @args
 
       clean_args = @class::Util.real_query(args)
 
       @request = mock('Request', :uri => @uri, :unparsed_uri => "#{@uri}?#{args}")
 
-      @request.should_receive(:param).with('timestamp').any_number_of_times.and_return(@timestamp)
-      @request.should_receive(:param).with('token').any_number_of_times.and_return(@token)
+      @request.should_receive(:param).with('_asd').any_number_of_times.and_return(_asd)
 
       @request.should_receive(:args).with(no_args).any_number_of_times.and_return(args)
       @request.should_receive(:args=).with(clean_args).any_number_of_times.and_return(clean_args)

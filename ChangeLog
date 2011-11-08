@@ -1,5 +1,13 @@
 = Revision history for apache_secure_download
 
+== 0.2.0 [2011-11-08]
+
+* Changed to use one query parameter only (Not backwards compatible!)
+
+== 0.1.3 [2011-11-07]
+
+* Easier split when URL is just a path
+
 == 0.1.2 [2011-09-29]
 
 * Fixed check_access when there are no query args

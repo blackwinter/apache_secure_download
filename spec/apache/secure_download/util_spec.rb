@@ -15,10 +15,10 @@ describe Apache::SecureDownload::Util do
     describe "generating secure URLs" do
 
       before :each do
-        @timestamp = @now.to_i + 60
+        @timestamp = '%010x' % (@now.to_i + 60)
         @token     = '5671a9b3966e8bbed91fc0bb5594d576c504cdf0'
 
-        @result = "?timestamp=#{@timestamp}&token=#{@token}"
+        @result = "?_asd=#{@timestamp}#{@token}"
       end
 
       it "should generate secure URL" do
@@ -67,8 +67,8 @@ describe Apache::SecureDownload::Util do
     describe "with custom expiration" do
 
       before :each do
-        @result1 = "#{@url}?timestamp=1204025218&token=7e51f91cf4406f308a8df24f4e2cbf188de3c1bf"
-        @result2 = "#{@url}?timestamp=1204026000&token=58eb12f9fc3fcd984fe4e918d3fd0590392c172d"
+        @result1 = "#{@url}?_asd=#{'%010x' % 1204025218}7e51f91cf4406f308a8df24f4e2cbf188de3c1bf"
+        @result2 = "#{@url}?_asd=#{'%010x' % 1204026000}58eb12f9fc3fcd984fe4e918d3fd0590392c172d"
       end
 
       it "should accept time" do
@@ -90,9 +90,9 @@ describe Apache::SecureDownload::Util do
     describe "caching" do
 
       before :each do
-        @result1 = "#{@url}?timestamp=1204024680&token=ccf279daf1787d34ad063cbf5851ee88aae967fb"
-        @result2 = "#{@url}?timestamp=1204024740&token=c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8"
-        @result3 = "#{@url}?timestamp=1204024800&token=aa11618f1cc0883a29e9239b777ca53dfc4d9604"
+        @result1 = "#{@url}?_asd=#{'%010x' % 1204024680}ccf279daf1787d34ad063cbf5851ee88aae967fb"
+        @result2 = "#{@url}?_asd=#{'%010x' % 1204024740}c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8"
+        @result3 = "#{@url}?_asd=#{'%010x' % 1204024800}aa11618f1cc0883a29e9239b777ca53dfc4d9604"
       end
 
       describe "explicitly (with expires)" do
@@ -151,20 +151,20 @@ describe Apache::SecureDownload::Util do
       @module.token(@secret, @path, @timestamp + 42).should_not == @result
     end
 
-    it "should ignore timestamp parameter in path" do
-      @module.token(@secret, @path + '?timestamp=foo', @timestamp).should == @result
+    it "should not ignore timestamp parameter in path" do
+      @module.token(@secret, @path + '?timestamp=foo', @timestamp).should_not == @result
     end
 
-    it "should ignore token parameter in path" do
-      @module.token(@secret, @path + '?token=bar', @timestamp).should == @result
+    it "should not ignore token parameter in path" do
+      @module.token(@secret, @path + '?token=bar', @timestamp).should_not == @result
     end
 
-    it "should ignore timestamp and token parameters in path" do
-      @module.token(@secret, @path + '?timestamp=foo&token=bar', @timestamp).should == @result
+    it "should not ignore timestamp and token parameters in path" do
+      @module.token(@secret, @path + '?timestamp=foo&token=bar', @timestamp).should_not == @result
     end
 
-    it "should ignore timestamp and token parameters in path, regardless of order" do
-      @module.token(@secret, @path + '?token=bar&timestamp=foo', @timestamp).should == @result
+    it "should ignore _asd parameter in path" do
+      @module.token(@secret, @path + '?_asd=baz', @timestamp).should == @result
     end
 
     describe "when other parameters are present in path" do
@@ -180,20 +180,20 @@ describe Apache::SecureDownload::Util do
           @module.token(@secret, @path2 + '&timestamp=foo&token=bar', @timestamp).should_not == @result
         end
 
-        it "should ignore timestamp parameter in path" do
-          @module.token(@secret, @path2 + '&timestamp=foo', @timestamp).should == @result2
+        it "should not ignore timestamp parameter in path" do
+          @module.token(@secret, @path2 + '&timestamp=foo', @timestamp).should_not == @result2
         end
 
-        it "should ignore token parameter in path" do
-          @module.token(@secret, @path2 + '&token=bar', @timestamp).should == @result2
+        it "should not ignore token parameter in path" do
+          @module.token(@secret, @path2 + '&token=bar', @timestamp).should_not == @result2
         end
 
-        it "should ignore timestamp and token parameters in path" do
-          @module.token(@secret, @path2 + '&timestamp=foo&token=bar', @timestamp).should == @result2
+        it "should not ignore timestamp and token parameters in path" do
+          @module.token(@secret, @path2 + '&timestamp=foo&token=bar', @timestamp).should_not == @result2
         end
 
-        it "should ignore timestamp and token parameters in path, regardless of order" do
-          @module.token(@secret, @path2 + '&token=bar&timestamp=foo', @timestamp).should == @result2
+        it "should ignore _asd parameter in path" do
+          @module.token(@secret, @path2 + '&_asd=baz', @timestamp).should == @result2
         end
 
       end
@@ -209,20 +209,20 @@ describe Apache::SecureDownload::Util do
           @module.token(@secret, @path + '?timestamp=foo&token=bar' + @query, @timestamp).should_not == @result
         end
 
-        it "should ignore timestamp parameter in path" do
-          @module.token(@secret, @path + '?timestamp=foo' + @query, @timestamp).should == @result2
+        it "should not ignore timestamp parameter in path" do
+          @module.token(@secret, @path + '?timestamp=foo' + @query, @timestamp).should_not == @result2
         end
 
-        it "should ignore token parameter in path" do
-          @module.token(@secret, @path + '?token=bar' + @query, @timestamp).should == @result2
+        it "should not ignore token parameter in path" do
+          @module.token(@secret, @path + '?token=bar' + @query, @timestamp).should_not == @result2
         end
 
-        it "should ignore timestamp and token parameters in path" do
-          @module.token(@secret, @path + '?timestamp=foo&token=bar' + @query, @timestamp).should == @result2
+        it "should not ignore timestamp and token parameters in path" do
+          @module.token(@secret, @path + '?timestamp=foo&token=bar' + @query, @timestamp).should_not == @result2
         end
 
-        it "should ignore timestamp and token parameters in path, regardless of order" do
-          @module.token(@secret, @path + '?token=bar&timestamp=foo' + @query, @timestamp).should == @result2
+        it "should ignore _asd parameter in path" do
+          @module.token(@secret, @path + '?_asd=baz' + @query, @timestamp).should == @result2
         end
 
       end
@@ -251,20 +251,20 @@ describe Apache::SecureDownload::Util do
 
     describe "with recognized query parameters" do
 
-      it "should remove timestamp parameter" do
-        @module.real_path(@path + '?timestamp=foo').should == @path
+      it "should not remove timestamp parameter" do
+        @module.real_path(@path + '?timestamp=foo').should_not == @path
       end
 
-      it "should remove token parameter" do
-        @module.real_path(@path + '?token=bar').should == @path
+      it "should not remove token parameter" do
+        @module.real_path(@path + '?token=bar').should_not == @path
       end
 
-      it "should remove timestamp and token parameters" do
-        @module.real_path(@path + '?timestamp=foo&token=bar').should == @path
+      it "should not remove timestamp and token parameters" do
+        @module.real_path(@path + '?timestamp=foo&token=bar').should_not == @path
       end
 
-      it "should remove timestamp and token parameters, regardless of order" do
-        @module.real_path(@path + '?token=bar&timestamp=foo').should == @path
+      it "should remove _asd parameter" do
+        @module.real_path(@path + '?_asd=baz').should == @path
       end
 
       describe "when other parameters are present" do
@@ -275,20 +275,20 @@ describe Apache::SecureDownload::Util do
             @path2 = @path + '?foo=bar'
           end
 
-          it "should remove timestamp parameter" do
-            @module.real_path(@path2 + '&timestamp=foo').should == @path2
+          it "should not remove timestamp parameter" do
+            @module.real_path(@path2 + '&timestamp=foo').should_not == @path2
           end
 
-          it "should remove token parameter" do
-            @module.real_path(@path2 + '&token=bar').should == @path2
+          it "should not remove token parameter" do
+            @module.real_path(@path2 + '&token=bar').should_not == @path2
           end
 
-          it "should remove timestamp and token parameters" do
-            @module.real_path(@path2 + '&timestamp=foo&token=bar').should == @path2
+          it "should not remove timestamp and token parameters" do
+            @module.real_path(@path2 + '&timestamp=foo&token=bar').should_not == @path2
           end
 
-          it "should remove timestamp and token parameters, regardless of order" do
-            @module.real_path(@path2 + '&token=bar&timestamp=foo').should == @path2
+          it "should remove _asd parameter" do
+            @module.real_path(@path2 + '&_asd=baz').should == @path2
           end
 
         end
@@ -300,20 +300,20 @@ describe Apache::SecureDownload::Util do
             @path2 = @path + @query.sub(/&/, '?')
           end
 
-          it "should remove timestamp parameter" do
-            @module.real_path(@path + '?timestamp=foo' + @query).should == @path2
+          it "should not remove timestamp parameter" do
+            @module.real_path(@path + '?timestamp=foo' + @query).should_not == @path2
           end
 
-          it "should remove token parameter" do
-            @module.real_path(@path + '?token=bar' + @query).should == @path2
+          it "should not remove token parameter" do
+            @module.real_path(@path + '?token=bar' + @query).should_not == @path2
           end
 
-          it "should remove timestamp and token parameters" do
-            @module.real_path(@path + '?timestamp=foo&token=bar' + @query).should == @path2
+          it "should not remove timestamp and token parameters" do
+            @module.real_path(@path + '?timestamp=foo&token=bar' + @query).should_not == @path2
           end
 
-          it "should remove timestamp and token parameters, regardless of order" do
-            @module.real_path(@path + '?token=bar&timestamp=foo' + @query).should == @path2
+          it "should remove _asd parameter" do
+            @module.real_path(@path + '?_asd=baz' + @query).should == @path2
           end
 
         end
@@ -344,20 +344,20 @@ describe Apache::SecureDownload::Util do
 
     describe "with recognized query parameters" do
 
-      it "should remove timestamp parameter" do
-        @module.real_query(@query + '&timestamp=foo').should == @query
+      it "should not remove timestamp parameter" do
+        @module.real_query(@query + '&timestamp=foo').should_not == @query
       end
 
-      it "should remove token parameter" do
-        @module.real_query(@query + '&token=bar').should == @query
+      it "should not remove token parameter" do
+        @module.real_query(@query + '&token=bar').should_not == @query
       end
 
-      it "should remove timestamp and token parameters" do
-        @module.real_query(@query + '&timestamp=foo&token=bar').should == @query
+      it "should not remove timestamp and token parameters" do
+        @module.real_query(@query + '&timestamp=foo&token=bar').should_not == @query
       end
 
-      it "should remove timestamp and token parameters, regardless of order" do
-        @module.real_query(@query + '&token=bar&timestamp=foo').should == @query
+      it "should remove _asd parameter" do
+        @module.real_query(@query + '&_asd=baz').should == @query
       end
 
       describe "when other parameters are present" do
@@ -367,20 +367,20 @@ describe Apache::SecureDownload::Util do
           @query2 = @query + @params
         end
 
-        it "should remove timestamp parameter" do
-          @module.real_query(@query + '&timestamp=foo' + @params).should == @query2
+        it "should not remove timestamp parameter" do
+          @module.real_query(@query + '&timestamp=foo' + @params).should_not == @query2
         end
 
-        it "should remove token parameter" do
-          @module.real_query(@query + '&token=bar' + @params).should == @query2
+        it "should not remove token parameter" do
+          @module.real_query(@query + '&token=bar' + @params).should_not == @query2
         end
 
-        it "should remove timestamp and token parameters" do
-          @module.real_query(@query + '&timestamp=foo&token=bar' + @params).should == @query2
+        it "should not remove timestamp and token parameters" do
+          @module.real_query(@query + '&timestamp=foo&token=bar' + @params).should_not == @query2
         end
 
-        it "should remove timestamp and token parameters, regardless of order" do
-          @module.real_query(@query + '&token=bar&timestamp=foo' + @params).should == @query2
+        it "should remove _asd parameter" do
+          @module.real_query(@query + '&_asd=baz' + @params).should == @query2
         end
 
       end

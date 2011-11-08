@@ -53,7 +53,7 @@ module Apache
     # If either condition doesn't hold true, access to the requested resource
     # is denied!
     def check_access(request)
-      timestamp, token = request.param('timestamp'), request.param('token')
+      timestamp, token = Util.split(request.param(Util::TOKEN_KEY))
 
       # Remove timestamp and token from query args
       request.args &&= Util.real_query(request.args)
@@ -61,9 +61,8 @@ module Apache
       return FORBIDDEN if @deny  && request.uri =~ @deny
       return OK        if @allow && request.uri =~ @allow
 
-      return FORBIDDEN if timestamp.to_i < Time.now.to_i
-      return FORBIDDEN if token != Util.token(@secret, request.unparsed_uri, timestamp)
-
+      return FORBIDDEN if timestamp < Time.now.to_i ||
+        token != Util.token(@secret, request.unparsed_uri, timestamp)
       return OK
     end
 
