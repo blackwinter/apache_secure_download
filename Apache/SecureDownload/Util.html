@@ -66,11 +66,15 @@
     
     <li><a href="#method-i-clean">#clean</a>
     
+    <li><a href="#method-i-join">#join</a>
+    
     <li><a href="#method-i-real_path">#real_path</a>
     
     <li><a href="#method-i-real_query">#real_query</a>
     
     <li><a href="#method-i-secure_url">#secure_url</a>
+    
+    <li><a href="#method-i-split">#split</a>
     
     <li><a href="#method-i-token">#token</a>
     
@@ -129,6 +133,29 @@
     
 
     
+    <!-- Constants -->
+    <section id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt id="TIMESTAMP_LENGTH">TIMESTAMP_LENGTH
+        
+        <dd class="description">
+        
+      
+        <dt id="TOKEN_KEY">TOKEN_KEY
+        
+        <dd class="description">
+        
+      
+        <dt id="TOKEN_LENGTH">TOKEN_LENGTH
+        
+        <dd class="description">
+        
+      
+      </dl>
+    </section>
+    
 
     
 
@@ -136,6 +163,37 @@
     
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
       <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-join" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">join</span><span
+            class="method-args">(timestamp, token)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Joins <code>timestamp</code> and <code>token</code> parameters into a
+single value.</p>
+          
+
+          
+          <div class="method-source-code" id="join-source">
+            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">join</span>(<span class="ruby-identifier">timestamp</span>, <span class="ruby-identifier">token</span>)
+  <span class="ruby-node">&quot;#{&quot;%0#{TIMESTAMP_LENGTH}x&quot; % timestamp}#{token}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- join-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- join-method -->
 
     
       <div id="method-i-real_path" class="method-detail ">
@@ -149,12 +207,12 @@
 
         <div class="method-description">
           
-          <p>Returns <code>path</code> with timestamp and token parameters removed.</p>
+          <p>Returns <code>path</code> with timestamp and token parameter removed.</p>
           
 
           
           <div class="method-source-code" id="real_path-source">
-            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 113</span>
+            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 127</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">real_path</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-identifier">clean</span>(<span class="ruby-identifier">path</span>, <span class="ruby-value">:path</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -179,12 +237,12 @@
 
         <div class="method-description">
           
-          <p>Returns <code>query</code> with timestamp and token parameters removed.</p>
+          <p>Returns <code>query</code> with timestamp and token parameter removed.</p>
           
 
           
           <div class="method-source-code" id="real_query-source">
-            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 118</span>
+            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 132</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">real_query</span>(<span class="ruby-identifier">query</span>)
   <span class="ruby-identifier">clean</span>(<span class="ruby-identifier">query</span>, <span class="ruby-value">:query</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -202,7 +260,7 @@
         
         <div class="method-heading">
           <span class="method-name">secure_url</span><span
-            class="method-args">(secret, url, expires = Time.now + 60)</span>
+            class="method-args">(s, u, e = Time.now + 60)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -233,59 +291,57 @@ given)</p>
 <p>Examples (<code>s = &quot;secret&quot;</code>):</p>
 
 <pre class="ruby"><span class="ruby-comment"># Only the path component (and an optional query component) will be taken into account</span>
-<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>)                    <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204024678&amp;token=5671a9b3966e8bbed91fc0bb5594d576c504cdf0&quot;</span>
-<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;http://example.com/secure/url&quot;</span>)  <span class="ruby-comment">#=&gt; &quot;http://example.com/secure/url?timestamp=1204024678&amp;token=5671a9b3966e8bbed91fc0bb5594d576c504cdf0&quot;</span>
-<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url?query=value&quot;</span>)        <span class="ruby-comment">#=&gt; &quot;/secure/url?query=value&amp;timestamp=1204024678&amp;token=b482f943c35f4a1b5da6c646df6a65c0edc364cf&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>)                    <span class="ruby-comment">#=&gt; &quot;/secure/url?_asd=0047c3f5665671a9b3966e8bbed91fc0bb5594d576c504cdf0&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;http://example.com/secure/url&quot;</span>)  <span class="ruby-comment">#=&gt; &quot;http://example.com/secure/url?_asd=0047c3f5665671a9b3966e8bbed91fc0bb5594d576c504cdf0&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url?query=value&quot;</span>)        <span class="ruby-comment">#=&gt; &quot;/secure/url?query=value&amp;_asd=0047c3f566b482f943c35f4a1b5da6c646df6a65c0edc364cf&quot;</span>
 
 <span class="ruby-comment"># Expires in 10 minutes</span>
-<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">+</span> <span class="ruby-value">600</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204025218&amp;token=7e51f91cf4406f308a8df24f4e2cbf188de3c1bf&quot;</span>
-<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">600</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204026000&amp;token=58eb12f9fc3fcd984fe4e918d3fd0590392c172d&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">+</span> <span class="ruby-value">600</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?_asd=0047c3f7827e51f91cf4406f308a8df24f4e2cbf188de3c1bf&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">600</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?_asd=0047c3fa9058eb12f9fc3fcd984fe4e918d3fd0590392c172d&quot;</span>
 
 <span class="ruby-comment"># Setting an offset will also allow caching; turn it off explicitly</span>
-<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">600</span>, :<span class="ruby-identifier">cache</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204025218&amp;token=7e51f91cf4406f308a8df24f4e2cbf188de3c1bf&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">600</span>, :<span class="ruby-identifier">cache</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?_asd=0047c3f7827e51f91cf4406f308a8df24f4e2cbf188de3c1bf&quot;</span>
 
 <span class="ruby-comment"># Produce identical URLs for a window of 1 minute (on average)</span>
 <span class="ruby-identifier">t</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
-<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">expires</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">t</span>,      :<span class="ruby-identifier">cache</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204024680&amp;token=ccf279daf1787d34ad063cbf5851ee88aae967fb&quot;</span>
-<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">expires</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">+</span> <span class="ruby-value">30</span>, :<span class="ruby-identifier">cache</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204024680&amp;token=ccf279daf1787d34ad063cbf5851ee88aae967fb&quot;</span>
-<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">expires</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">+</span> <span class="ruby-value">60</span>, :<span class="ruby-identifier">cache</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204024740&amp;token=c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8&quot;</span>
-<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">expires</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">+</span> <span class="ruby-value">90</span>, :<span class="ruby-identifier">cache</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204024740&amp;token=c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">expires</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">t</span>,      :<span class="ruby-identifier">cache</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?_asd=0047c3f568ccf279daf1787d34ad063cbf5851ee88aae967fb&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">expires</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">+</span> <span class="ruby-value">30</span>, :<span class="ruby-identifier">cache</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?_asd=0047c3f568ccf279daf1787d34ad063cbf5851ee88aae967fb&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">expires</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">+</span> <span class="ruby-value">60</span>, :<span class="ruby-identifier">cache</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?_asd=0047c3f5a4c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">expires</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">+</span> <span class="ruby-value">90</span>, :<span class="ruby-identifier">cache</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>)  <span class="ruby-comment">#=&gt; &quot;/secure/url?_asd=0047c3f5a4c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8&quot;</span>
 
 <span class="ruby-comment"># Same as before, but use offset</span>
-<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>) <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204024740&amp;token=c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>) <span class="ruby-comment">#=&gt; &quot;/secure/url?_asd=0047c3f5a4c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8&quot;</span>
 <span class="ruby-comment"># 30 seconds later...</span>
-<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>) <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204024740&amp;token=c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>) <span class="ruby-comment">#=&gt; &quot;/secure/url?_asd=0047c3f5a4c7dcea5679ad539a7bad1dc4b7f44eb3dd36d6e8&quot;</span>
 <span class="ruby-comment"># 30 seconds later...</span>
-<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>) <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204024800&amp;token=aa11618f1cc0883a29e9239b777ca53dfc4d9604&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>) <span class="ruby-comment">#=&gt; &quot;/secure/url?_asd=0047c3f5e0aa11618f1cc0883a29e9239b777ca53dfc4d9604&quot;</span>
 <span class="ruby-comment"># 30 seconds later...</span>
-<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>) <span class="ruby-comment">#=&gt; &quot;/secure/url?timestamp=1204024800&amp;token=aa11618f1cc0883a29e9239b777ca53dfc4d9604&quot;</span>
+<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>) <span class="ruby-comment">#=&gt; &quot;/secure/url?_asd=0047c3f5e0aa11618f1cc0883a29e9239b777ca53dfc4d9604&quot;</span>
 </pre>
           
 
           
           <div class="method-source-code" id="secure_url-source">
-            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 84</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">secret</span>, <span class="ruby-identifier">url</span>, <span class="ruby-identifier">expires</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">+</span> <span class="ruby-value">60</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">expires</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
-    <span class="ruby-identifier">expires</span>[<span class="ruby-value">:offset</span>] <span class="ruby-operator">||=</span> <span class="ruby-value">60</span>
-    <span class="ruby-identifier">cache</span> = <span class="ruby-identifier">expires</span>[<span class="ruby-value">:cache</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">expires</span>[<span class="ruby-value">:offset</span>]
+            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-identifier">u</span>, <span class="ruby-identifier">e</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">+</span> <span class="ruby-value">60</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+    <span class="ruby-identifier">e</span>[<span class="ruby-value">:offset</span>] <span class="ruby-operator">||=</span> <span class="ruby-value">60</span>
+    <span class="ruby-identifier">c</span> = <span class="ruby-identifier">e</span>[<span class="ruby-value">:cache</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">e</span>[<span class="ruby-value">:offset</span>]
 
-    <span class="ruby-identifier">timestamp</span> = (<span class="ruby-identifier">expires</span>[<span class="ruby-value">:expires</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">expires</span>[<span class="ruby-value">:offset</span>]).<span class="ruby-identifier">to_i</span>
+    <span class="ruby-identifier">t</span> = (<span class="ruby-identifier">e</span>[<span class="ruby-value">:expires</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">e</span>[<span class="ruby-value">:offset</span>]).<span class="ruby-identifier">to_i</span>
 
-    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">expires</span>[<span class="ruby-value">:cache</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">cache</span>.<span class="ruby-identifier">zero?</span>
-      <span class="ruby-comment"># make the URL cacheable for +cache+ seconds *on average*</span>
-      <span class="ruby-identifier">timestamp</span> = ((<span class="ruby-identifier">timestamp</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">cache</span>.<span class="ruby-identifier">to_f</span>).<span class="ruby-identifier">round</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>) * <span class="ruby-identifier">cache</span>.<span class="ruby-identifier">to_i</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">e</span>[<span class="ruby-value">:cache</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">zero?</span>
+      <span class="ruby-comment"># make the URL cacheable for +c+ seconds *on average*</span>
+      <span class="ruby-identifier">t</span> = ((<span class="ruby-identifier">t</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">to_f</span>).<span class="ruby-identifier">round</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>) * <span class="ruby-identifier">c</span>.<span class="ruby-identifier">to_i</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">timestamp</span> = <span class="ruby-identifier">expires</span>.<span class="ruby-identifier">to_i</span>
+    <span class="ruby-identifier">t</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_i</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">path</span>, <span class="ruby-identifier">query</span> = <span class="ruby-identifier">url</span>[<span class="ruby-value">0</span>, <span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">'/'</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">'?'</span>, <span class="ruby-value">2</span>) <span class="ruby-operator">:</span> <span class="ruby-constant">URI</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">url</span>).<span class="ruby-identifier">values_at</span>(<span class="ruby-value">5</span>, <span class="ruby-value">7</span>)
-  <span class="ruby-identifier">path</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'?'</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">query</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">query</span>
+  <span class="ruby-identifier">r</span>, <span class="ruby-identifier">q</span> = <span class="ruby-identifier">u</span>[<span class="ruby-value">0</span>, <span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">'/'</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">'?'</span>, <span class="ruby-value">2</span>) <span class="ruby-operator">:</span> <span class="ruby-constant">URI</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">u</span>).<span class="ruby-identifier">values_at</span>(<span class="ruby-value">5</span>, <span class="ruby-value">7</span>)
+  <span class="ruby-identifier">r</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'?'</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">q</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">q</span>
 
-  <span class="ruby-identifier">params</span> = <span class="ruby-node">&quot;timestamp=#{timestamp}&amp;token=#{token(secret, path, timestamp)}&quot;</span>
-
-  <span class="ruby-identifier">url</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/#|\z/</span>, <span class="ruby-node">&quot;#{query ? '&amp;' : '?'}#{params}\\&amp;&quot;</span>)
+  <span class="ruby-identifier">u</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/#|\z/</span>, <span class="ruby-node">&quot;#{q ? '&amp;' : '?'}#{TOKEN_KEY}=#{join(t, token(s, r, t))}\\&amp;&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- secure_url-source -->
           
@@ -295,6 +351,36 @@ given)</p>
 
         
       </div><!-- secure_url-method -->
+
+    
+      <div id="method-i-split" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">split</span><span
+            class="method-args">(value)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Splits <code>value</code> into timestamp and token parameters.</p>
+          
+
+          
+          <div class="method-source-code" id="split-source">
+            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 117</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">split</span>(<span class="ruby-identifier">value</span>)
+  [<span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>, <span class="ruby-constant">TIMESTAMP_LENGTH</span>].<span class="ruby-identifier">to_i</span>(<span class="ruby-value">16</span>), <span class="ruby-identifier">value</span>[<span class="ruby-constant">TIMESTAMP_LENGTH</span>, <span class="ruby-constant">TOKEN_LENGTH</span>]]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- split-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- split-method -->
 
     
       <div id="method-i-token" class="method-detail ">
@@ -314,7 +400,7 @@ given)</p>
 
           
           <div class="method-source-code" id="token-source">
-            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 108</span>
+            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">token</span>(<span class="ruby-identifier">secret</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">timestamp</span>)
   <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-node">&quot;#{secret}#{real_path(path)}#{timestamp}&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -345,14 +431,14 @@ given)</p>
 
         <div class="method-description">
           
-          <p>Returns <code>string</code> with timestamp and token parameters removed.
-The <code>type</code> indicates whether it’s a <em>path</em> or a
+          <p>Returns <code>string</code> with timestamp and token parameter removed. The
+<code>type</code> indicates whether it’s a <em>path</em> or a
 <em>query</em>.</p>
           
 
           
           <div class="method-source-code" id="clean-source">
-            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 126</span>
+            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">clean</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">type</span>)
   <span class="ruby-identifier">char</span> = <span class="ruby-keyword">case</span> <span class="ruby-identifier">type</span>
     <span class="ruby-keyword">when</span> <span class="ruby-value">:path</span>  <span class="ruby-keyword">then</span> <span class="ruby-string">'\?'</span>
@@ -360,9 +446,7 @@ The <code>type</code> indicates whether it’s a <em>path</em> or a
     <span class="ruby-keyword">else</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;type #{type.inspect} not supported&quot;</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-node">]timestamp token]</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-identifier">string</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">memo</span>, <span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">memo</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/(#{char}|&amp;)#{key}=[^&amp;]*(&amp;?)/</span>) { <span class="ruby-node">$1</span> <span class="ruby-keyword">unless</span> <span class="ruby-node">$2</span>.<span class="ruby-identifier">empty?</span> }
-  }
+  <span class="ruby-identifier">string</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/(#{char}|&amp;)_asd=[^&amp;]*(&amp;?)/</span>) { <span class="ruby-node">$1</span> <span class="ruby-keyword">unless</span> <span class="ruby-node">$2</span>.<span class="ruby-identifier">empty?</span> }
 <span class="ruby-keyword">end</span></pre>
           </div><!-- clean-source -->
           
