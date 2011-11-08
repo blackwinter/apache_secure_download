@@ -53,7 +53,7 @@ module Apache
     # If either condition doesn't hold true, access to the requested resource
     # is denied!
     def check_access(request)
-      timestamp, token = Util.split(request.param(Util::TOKEN_KEY))
+      timestamp, token = Util.split(request.param(Util::TOKEN_KEY) || '')
 
       # Remove timestamp and token from query args
       request.args &&= Util.real_query(request.args)

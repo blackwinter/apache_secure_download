@@ -78,6 +78,11 @@ describe Apache::SecureDownload do
       @handler = @class.new(@secret)
     end
 
+    it "should be forbidden without _asd parameter" do
+      mock_request(false)
+      @handler.check_access(@request).should == Apache::FORBIDDEN
+    end
+
     shared_examples "normally" do
 
       it_should_be_allowed "with correct secret"
@@ -237,11 +242,15 @@ describe Apache::SecureDownload do
 
     end
 
-    def mock_request
-      _asd = "#{'%010x' % @timestamp}#{@token}"
+    def mock_request(have_asd = true)
+      if have_asd
+        _asd = "#{'%010x' % @timestamp}#{@token}"
 
-      args = "_asd=#{_asd}"
-      args = "#{@args}&#{args}" if @args
+        args = "_asd=#{_asd}"
+        args = "#{@args}&#{args}" if @args
+      else
+        args = "#{@args}"
+      end
 
       clean_args = @class::Util.real_query(args)
 
