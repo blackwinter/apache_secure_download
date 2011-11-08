@@ -1,5 +1,9 @@
 = Revision history for apache_secure_download
 
+== 0.2.1 [2011-11-08]
+
+* Fixed case with missing parameter
+
 == 0.2.0 [2011-11-08]
 
 * Changed to use one query parameter only (Not backwards compatible!)
