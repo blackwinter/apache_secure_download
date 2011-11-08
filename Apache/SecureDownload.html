@@ -223,7 +223,7 @@ is denied!</p>
           <div class="method-source-code" id="check_access-source">
             <pre><span class="ruby-comment"># File lib/apache/secure_download.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">check_access</span>(<span class="ruby-identifier">request</span>)
-  <span class="ruby-identifier">timestamp</span>, <span class="ruby-identifier">token</span> = <span class="ruby-constant">Util</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">request</span>.<span class="ruby-identifier">param</span>(<span class="ruby-constant">Util</span><span class="ruby-operator">::</span><span class="ruby-constant">TOKEN_KEY</span>))
+  <span class="ruby-identifier">timestamp</span>, <span class="ruby-identifier">token</span> = <span class="ruby-constant">Util</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">request</span>.<span class="ruby-identifier">param</span>(<span class="ruby-constant">Util</span><span class="ruby-operator">::</span><span class="ruby-constant">TOKEN_KEY</span>) <span class="ruby-operator">||</span> <span class="ruby-string">''</span>)
 
   <span class="ruby-comment"># Remove timestamp and token from query args</span>
   <span class="ruby-identifier">request</span>.<span class="ruby-identifier">args</span> <span class="ruby-operator">&amp;&amp;=</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">real_query</span>(<span class="ruby-identifier">request</span>.<span class="ruby-identifier">args</span>)
