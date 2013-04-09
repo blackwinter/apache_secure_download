@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>Class: Apache::SecureDownload</title>
+<title>class Apache::SecureDownload - apache_secure_download Application documentation (v0.2.1)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -43,6 +43,8 @@
 </nav>
 
 
+  
+
   <div id="file-metadata">
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
@@ -66,15 +68,16 @@
 </nav>
 
     
+    
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
 
   <ul class="link-list">
     
-    <li><a href="#method-c-new">::new</a>
+    <li ><a href="#method-c-new">::new</a>
     
-    <li><a href="#method-i-check_access">#check_access</a>
+    <li ><a href="#method-i-check_access">#check_access</a>
     
   </ul>
 </nav>
@@ -158,7 +161,9 @@
         <div class="method-heading">
           <span class="method-name">new</span><span
             class="method-args">(secret, options = {})</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -169,16 +174,17 @@ href="../Apache.html">Apache</a> web server. The argument
 <code>secret</code> is the shared secret string that the application uses
 to create valid URLs (tokens).</p>
           
+          
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/apache/secure_download.rb, line 40</span>
+            <pre><span class="ruby-comment"># File lib/apache/secure_download.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">secret</span>, <span class="ruby-identifier">options</span> = {})
-  <span class="ruby-ivar">@secret</span>, <span class="ruby-ivar">@deny</span>, <span class="ruby-ivar">@allow</span> = <span class="ruby-identifier">secret</span>, *<span class="ruby-identifier">options</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-value">:deny</span>, <span class="ruby-value">:allow</span>)
+  <span class="ruby-ivar">@secret</span>, <span class="ruby-ivar">@deny</span>, <span class="ruby-ivar">@allow</span> = <span class="ruby-identifier">secret</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-value">:deny</span>, <span class="ruby-value">:allow</span>)
 
-  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">'secret is missing'</span>      <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@secret</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
-  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">':deny is not a regexp'</span>  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@deny</span>.<span class="ruby-identifier">nil?</span>  <span class="ruby-operator">||</span> <span class="ruby-ivar">@deny</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Regexp</span>)
-  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">':allow is not a regexp'</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@allow</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@allow</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Regexp</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;secret is missing&#39;</span>      <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@secret</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;:deny is not a regexp&#39;</span>  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@deny</span>.<span class="ruby-identifier">nil?</span>  <span class="ruby-operator">||</span> <span class="ruby-ivar">@deny</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Regexp</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;:allow is not a regexp&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@allow</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@allow</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Regexp</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -201,7 +207,9 @@ to create valid URLs (tokens).</p>
         <div class="method-heading">
           <span class="method-name">check_access</span><span
             class="method-args">(request)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -215,15 +223,16 @@ requirements:</p>
 <p>The token is valid for the requested URL and the given timestamp</p>
 </li></ol>
 
-<p>If either condition doesn’t hold true, access to the requested resource
+<p>If either condition doesn&#39;t hold true, access to the requested resource
 is denied!</p>
+          
           
 
           
           <div class="method-source-code" id="check_access-source">
-            <pre><span class="ruby-comment"># File lib/apache/secure_download.rb, line 55</span>
+            <pre><span class="ruby-comment"># File lib/apache/secure_download.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">check_access</span>(<span class="ruby-identifier">request</span>)
-  <span class="ruby-identifier">timestamp</span>, <span class="ruby-identifier">token</span> = <span class="ruby-constant">Util</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">request</span>.<span class="ruby-identifier">param</span>(<span class="ruby-constant">Util</span><span class="ruby-operator">::</span><span class="ruby-constant">TOKEN_KEY</span>) <span class="ruby-operator">||</span> <span class="ruby-string">''</span>)
+  <span class="ruby-identifier">timestamp</span>, <span class="ruby-identifier">token</span> = <span class="ruby-constant">Util</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">request</span>.<span class="ruby-identifier">param</span>(<span class="ruby-constant">Util</span><span class="ruby-operator">::</span><span class="ruby-constant">TOKEN_KEY</span>) <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span>)
 
   <span class="ruby-comment"># Remove timestamp and token from query args</span>
   <span class="ruby-identifier">request</span>.<span class="ruby-identifier">args</span> <span class="ruby-operator">&amp;&amp;=</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">real_query</span>(<span class="ruby-identifier">request</span>.<span class="ruby-identifier">args</span>)
@@ -254,7 +263,7 @@ is denied!</p>
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

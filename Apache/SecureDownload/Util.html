@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>Module: Apache::SecureDownload::Util</title>
+<title>module Apache::SecureDownload::Util - apache_secure_download Application documentation (v0.2.1)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -43,6 +43,8 @@
 </nav>
 
 
+  
+
   <div id="file-metadata">
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
@@ -58,25 +60,26 @@
     
     
     
+    
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
 
   <ul class="link-list">
     
-    <li><a href="#method-i-clean">#clean</a>
+    <li ><a href="#method-i-clean">#clean</a>
     
-    <li><a href="#method-i-join">#join</a>
+    <li ><a href="#method-i-join">#join</a>
     
-    <li><a href="#method-i-real_path">#real_path</a>
+    <li ><a href="#method-i-real_path">#real_path</a>
     
-    <li><a href="#method-i-real_query">#real_query</a>
+    <li ><a href="#method-i-real_query">#real_query</a>
     
-    <li><a href="#method-i-secure_url">#secure_url</a>
+    <li ><a href="#method-i-secure_url">#secure_url</a>
     
-    <li><a href="#method-i-split">#split</a>
+    <li ><a href="#method-i-split">#split</a>
     
-    <li><a href="#method-i-token">#token</a>
+    <li ><a href="#method-i-token">#token</a>
     
   </ul>
 </nav>
@@ -170,7 +173,9 @@
         <div class="method-heading">
           <span class="method-name">join</span><span
             class="method-args">(timestamp, token)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -179,10 +184,11 @@
           <p>Joins <code>timestamp</code> and <code>token</code> parameters into a
 single value.</p>
           
+          
 
           
           <div class="method-source-code" id="join-source">
-            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 112</span>
+            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">join</span>(<span class="ruby-identifier">timestamp</span>, <span class="ruby-identifier">token</span>)
   <span class="ruby-node">&quot;#{&quot;%0#{TIMESTAMP_LENGTH}x&quot; % timestamp}#{token}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -201,7 +207,9 @@ single value.</p>
         <div class="method-heading">
           <span class="method-name">real_path</span><span
             class="method-args">(path)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -209,10 +217,11 @@ single value.</p>
           
           <p>Returns <code>path</code> with timestamp and token parameter removed.</p>
           
+          
 
           
           <div class="method-source-code" id="real_path-source">
-            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 127</span>
+            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 129</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">real_path</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-identifier">clean</span>(<span class="ruby-identifier">path</span>, <span class="ruby-value">:path</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -231,7 +240,9 @@ single value.</p>
         <div class="method-heading">
           <span class="method-name">real_query</span><span
             class="method-args">(query)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -239,10 +250,11 @@ single value.</p>
           
           <p>Returns <code>query</code> with timestamp and token parameter removed.</p>
           
+          
 
           
           <div class="method-source-code" id="real_query-source">
-            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 132</span>
+            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 134</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">real_query</span>(<span class="ruby-identifier">query</span>)
   <span class="ruby-identifier">clean</span>(<span class="ruby-identifier">query</span>, <span class="ruby-value">:query</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -261,7 +273,9 @@ single value.</p>
         <div class="method-heading">
           <span class="method-name">secure_url</span><span
             class="method-args">(s, u, e = Time.now + 60)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -319,10 +333,11 @@ given)</p>
 <span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-string">&quot;/secure/url&quot;</span>, :<span class="ruby-identifier">offset</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">60</span>) <span class="ruby-comment">#=&gt; &quot;/secure/url?_asd=0047c3f5e0aa11618f1cc0883a29e9239b777ca53dfc4d9604&quot;</span>
 </pre>
           
+          
 
           
           <div class="method-source-code" id="secure_url-source">
-            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 90</span>
+            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 92</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">s</span>, <span class="ruby-identifier">u</span>, <span class="ruby-identifier">e</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">+</span> <span class="ruby-value">60</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
     <span class="ruby-identifier">e</span>[<span class="ruby-value">:offset</span>] <span class="ruby-operator">||=</span> <span class="ruby-value">60</span>
@@ -332,16 +347,16 @@ given)</p>
 
     <span class="ruby-keyword">unless</span> <span class="ruby-identifier">e</span>[<span class="ruby-value">:cache</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">zero?</span>
       <span class="ruby-comment"># make the URL cacheable for +c+ seconds *on average*</span>
-      <span class="ruby-identifier">t</span> = ((<span class="ruby-identifier">t</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">to_f</span>).<span class="ruby-identifier">round</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>) * <span class="ruby-identifier">c</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-identifier">t</span> = ((<span class="ruby-identifier">t</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">to_f</span>).<span class="ruby-identifier">round</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>) <span class="ruby-operator">*</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">to_i</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">t</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_i</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">r</span>, <span class="ruby-identifier">q</span> = <span class="ruby-identifier">u</span>[<span class="ruby-value">0</span>, <span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">'/'</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">'?'</span>, <span class="ruby-value">2</span>) <span class="ruby-operator">:</span> <span class="ruby-constant">URI</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">u</span>).<span class="ruby-identifier">values_at</span>(<span class="ruby-value">5</span>, <span class="ruby-value">7</span>)
-  <span class="ruby-identifier">r</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'?'</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">q</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">q</span>
+  <span class="ruby-identifier">r</span>, <span class="ruby-identifier">q</span> = <span class="ruby-identifier">u</span>[<span class="ruby-value">0</span>, <span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;/&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;?&#39;</span>, <span class="ruby-value">2</span>) <span class="ruby-operator">:</span> <span class="ruby-constant">URI</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">u</span>).<span class="ruby-identifier">values_at</span>(<span class="ruby-value">5</span>, <span class="ruby-value">7</span>)
+  <span class="ruby-identifier">r</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;?&#39;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">q</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">q</span>
 
-  <span class="ruby-identifier">u</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/#|\z/</span>, <span class="ruby-node">&quot;#{q ? '&amp;' : '?'}#{TOKEN_KEY}=#{join(t, token(s, r, t))}\\&amp;&quot;</span>)
+  <span class="ruby-identifier">u</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/#|\z/</span>, <span class="ruby-node">&quot;#{q ? &#39;&amp;&#39; : &#39;?&#39;}#{TOKEN_KEY}=#{join(t, token(s, r, t))}\\&amp;&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- secure_url-source -->
           
@@ -358,7 +373,9 @@ given)</p>
         <div class="method-heading">
           <span class="method-name">split</span><span
             class="method-args">(value)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -366,10 +383,11 @@ given)</p>
           
           <p>Splits <code>value</code> into timestamp and token parameters.</p>
           
+          
 
           
           <div class="method-source-code" id="split-source">
-            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 117</span>
+            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 119</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">split</span>(<span class="ruby-identifier">value</span>)
   [<span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>, <span class="ruby-constant">TIMESTAMP_LENGTH</span>].<span class="ruby-identifier">to_i</span>(<span class="ruby-value">16</span>), <span class="ruby-identifier">value</span>[<span class="ruby-constant">TIMESTAMP_LENGTH</span>, <span class="ruby-constant">TOKEN_LENGTH</span>]]
 <span class="ruby-keyword">end</span></pre>
@@ -388,7 +406,9 @@ given)</p>
         <div class="method-heading">
           <span class="method-name">token</span><span
             class="method-args">(secret, path, timestamp)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -397,10 +417,11 @@ given)</p>
           <p>Computes the token from <code>secret</code>, <code>path</code>, and
 <code>timestamp</code>.</p>
           
+          
 
           
           <div class="method-source-code" id="token-source">
-            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 122</span>
+            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 124</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">token</span>(<span class="ruby-identifier">secret</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">timestamp</span>)
   <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-node">&quot;#{secret}#{real_path(path)}#{timestamp}&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -425,24 +446,27 @@ given)</p>
         <div class="method-heading">
           <span class="method-name">clean</span><span
             class="method-args">(string, type)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
           
           <p>Returns <code>string</code> with timestamp and token parameter removed. The
-<code>type</code> indicates whether it’s a <em>path</em> or a
+<code>type</code> indicates whether it&#39;s a <em>path</em> or a
 <em>query</em>.</p>
+          
           
 
           
           <div class="method-source-code" id="clean-source">
-            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 140</span>
+            <pre><span class="ruby-comment"># File lib/apache/secure_download/util.rb, line 142</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">clean</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">type</span>)
   <span class="ruby-identifier">char</span> = <span class="ruby-keyword">case</span> <span class="ruby-identifier">type</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-value">:path</span>  <span class="ruby-keyword">then</span> <span class="ruby-string">'\?'</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-value">:query</span> <span class="ruby-keyword">then</span> <span class="ruby-string">'\A'</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:path</span>  <span class="ruby-keyword">then</span> <span class="ruby-string">&#39;\?&#39;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:query</span> <span class="ruby-keyword">then</span> <span class="ruby-string">&#39;\A&#39;</span>
     <span class="ruby-keyword">else</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;type #{type.inspect} not supported&quot;</span>
   <span class="ruby-keyword">end</span>
 
@@ -467,7 +491,7 @@ given)</p>
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 
