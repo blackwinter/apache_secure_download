@@ -4,12 +4,14 @@
 # apache_secure_download -- Apache module providing secure downloading        #
 #                           functionality                                     #
 #                                                                             #
-# Copyright (C) 2008-2010 University of Cologne,                              #
+# Copyright (C) 2008-2012 University of Cologne,                              #
 #                         Albertus-Magnus-Platz,                              #
 #                         50923 Cologne, Germany                              #
 #                                                                             #
+# Copyright (C) 2013 Jens Wille                                               #
+#                                                                             #
 # Authors:                                                                    #
-#     Jens Wille <jens.wille@uni-koeln.de>                                    #
+#     Jens Wille <jens.wille@gmail.com>                                       #
 #                                                                             #
 # apache_secure_download is free software: you can redistribute it and/or     #
 # modify it under the terms of the GNU Affero General Public License as       #

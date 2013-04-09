@@ -48,20 +48,22 @@ See Apache::SecureDownload::Util.secure_url for more examples.
 == LINKS
 
 <b></b>
-Documentation::     http://prometheus.rubyforge.org/apache_secure_download
-Source code::       http://github.com/blackwinter/apache_secure_download
-RubyForge project:: http://rubyforge.org/projects/prometheus
+Documentation:: http://blackwinter.github.com/apache_secure_download
+Source code::   http://github.com/blackwinter/apache_secure_download
+RubyGem::       http://rubygems.org/gems/apache_secure_download
 
 
 == AUTHORS
 
-* Jens Wille <mailto:jens.wille@uni-koeln.de>
+* Jens Wille <mailto:jens.wille@gmail.com>
 
 
 == LICENSE AND COPYRIGHT
 
-Copyright (C) 2008-2011 University of Cologne,
+Copyright (C) 2008-2012 University of Cologne,
 Albertus-Magnus-Platz, 50923 Cologne, Germany
+
+Copyright (C) 2013 Jens Wille
 
 apache_secure_download is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by

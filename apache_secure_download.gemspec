@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors = ["Jens Wille"]
   s.date = "2011-11-08"
   s.description = "Apache module providing secure downloading functionality, just like Mongrel Secure Download does for mongrel."
-  s.email = "jens.wille@uni-koeln.de"
+  s.email = "jens.wille@gmail.com"
   s.extra_rdoc_files = ["README", "COPYING", "ChangeLog"]
   s.files = ["lib/apache/secure_download.rb", "lib/apache/mock_constants.rb", "lib/apache/secure_download/util.rb", "lib/apache/secure_download/version.rb", "ChangeLog", "COPYING", "README", "Rakefile", "spec/apache/secure_download_spec.rb", "spec/apache/secure_download/util_spec.rb", "spec/spec_helper.rb", ".rspec"]
   s.homepage = "http://prometheus.rubyforge.org/apache_secure_download"
