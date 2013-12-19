@@ -1,8 +1,8 @@
-Tue, 16 Apr 2013 12:29:35 +0200
-README	Tue, 09 Apr 2013 12:29:44 +0200
+Thu, 19 Dec 2013 13:11:55 +0100
+README	Thu, 19 Dec 2013 13:11:14 +0100
 COPYING	Tue, 09 Apr 2013 11:32:19 +0200
-ChangeLog	Tue, 16 Apr 2013 12:19:20 +0200
+ChangeLog	Thu, 19 Dec 2013 13:11:06 +0100
 lib/apache/mock_constants.rb	Tue, 09 Apr 2013 11:32:19 +0200
 lib/apache/secure_download.rb	Tue, 09 Apr 2013 12:30:30 +0200
 lib/apache/secure_download/util.rb	Tue, 09 Apr 2013 12:30:39 +0200
-lib/apache/secure_download/version.rb	Tue, 09 Apr 2013 11:32:19 +0200
+lib/apache/secure_download/version.rb	Thu, 19 Dec 2013 13:11:21 +0100
