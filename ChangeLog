@@ -2,6 +2,10 @@
 
 = Revision history for apache_secure_download
 
+== 0.2.2 [2013-12-19]
+
+* Housekeeping.
+
 == 0.2.1 [2011-11-08]
 
 * Fixed case with missing parameter
