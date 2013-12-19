@@ -10,7 +10,7 @@ begin
       :summary      => %q{Apache module providing secure downloading functionality, just like Mongrel Secure Download does for mongrel.},
       :author       => %q{Jens Wille},
       :email        => %q{jens.wille@gmail.com},
-      :license      => %q{AGPL},
+      :license      => %q{AGPL-3.0},
       :homepage     => :blackwinter,
       :dependencies => %w[]
     }
