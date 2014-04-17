@@ -254,12 +254,12 @@ describe Apache::SecureDownload do
 
       clean_args = @class::Util.real_query(args)
 
-      @request = mock('Request', :uri => @uri, :unparsed_uri => "#{@uri}?#{args}")
+      @request = double('Request', :uri => @uri, :unparsed_uri => "#{@uri}?#{args}")
 
-      @request.should_receive(:param).with('_asd').any_number_of_times.and_return(_asd)
+      @request.stub(:param).with('_asd').and_return(_asd)
 
-      @request.should_receive(:args).with(no_args).any_number_of_times.and_return(args)
-      @request.should_receive(:args=).with(clean_args).any_number_of_times.and_return(clean_args)
+      @request.stub(:args).with(no_args).and_return(args)
+      @request.stub(:args=).with(clean_args).and_return(clean_args)
     end
 
   end
