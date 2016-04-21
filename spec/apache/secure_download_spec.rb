@@ -19,31 +19,31 @@ describe Apache::SecureDownload do
     end
 
     it "should not require :deny" do
-      @class.new('secret', :deny => nil).should be_an_instance_of(@class)
+      @class.new('secret', deny: nil).should be_an_instance_of(@class)
     end
 
     it "should accept a regexp for :deny" do
-      @class.new('secret', :deny => /regexp/).should be_an_instance_of(@class)
+      @class.new('secret', deny: /regexp/).should be_an_instance_of(@class)
     end
 
     it "should require :deny to be a regexp" do
-      lambda { @class.new('secret', :deny => 'regexp') }.should raise_error(ArgumentError, ':deny is not a regexp')
+      lambda { @class.new('secret', deny: 'regexp') }.should raise_error(ArgumentError, ':deny is not a regexp')
     end
 
     it "should not require :allow" do
-      @class.new('secret', :allow => nil).should be_an_instance_of(@class)
+      @class.new('secret', allow: nil).should be_an_instance_of(@class)
     end
 
     it "should accept a regexp for :allow" do
-      @class.new('secret', :allow => /regexp/).should be_an_instance_of(@class)
+      @class.new('secret', allow: /regexp/).should be_an_instance_of(@class)
     end
 
     it "should require :allow to be a regexp" do
-      lambda { @class.new('secret', :allow => 'regexp') }.should raise_error(ArgumentError, ':allow is not a regexp')
+      lambda { @class.new('secret', allow: 'regexp') }.should raise_error(ArgumentError, ':allow is not a regexp')
     end
 
     it "should accept :deny and :allow at the same time" do
-      @class.new('secret', :deny => /regexp/, :allow => /regexp/).should be_an_instance_of(@class)
+      @class.new('secret', deny: /regexp/, allow: /regexp/).should be_an_instance_of(@class)
     end
 
   end
@@ -165,7 +165,7 @@ describe Apache::SecureDownload do
     describe "with matching :allow" do
 
       before :each do
-        @handler = @class.new(@secret, :allow => /\A\/some\//)
+        @handler = @class.new(@secret, allow: /\A\/some\//)
       end
 
       it_should_behave_like "always allowed"
@@ -195,7 +195,7 @@ describe Apache::SecureDownload do
     describe "with non-matching :allow" do
 
       before :each do
-        @handler = @class.new(@secret, :allow => /\A\/other\//)
+        @handler = @class.new(@secret, allow: /\A\/other\//)
       end
 
       it_should_behave_like "normally"
@@ -205,7 +205,7 @@ describe Apache::SecureDownload do
     describe "with matching :deny" do
 
       before :each do
-        @handler = @class.new(@secret, :deny => /\A\/some\//)
+        @handler = @class.new(@secret, deny: /\A\/some\//)
       end
 
       it_should_behave_like "always forbidden"
@@ -235,7 +235,7 @@ describe Apache::SecureDownload do
     describe "with non-matching :deny" do
 
       before :each do
-        @handler = @class.new(@secret, :deny => /\A\/other\//)
+        @handler = @class.new(@secret, deny: /\A\/other\//)
       end
 
       it_should_behave_like "normally"
@@ -254,7 +254,7 @@ describe Apache::SecureDownload do
 
       clean_args = @class::Util.real_query(args)
 
-      @request = double('Request', :uri => @uri, :unparsed_uri => "#{@uri}?#{args}")
+      @request = double('Request', uri: @uri, unparsed_uri: "#{@uri}?#{args}")
 
       @request.stub(:param).with('_asd').and_return(_asd)
 

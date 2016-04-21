@@ -76,12 +76,12 @@ describe Apache::SecureDownload::Util do
       end
 
       it "should accept offset" do
-        @module.secure_url(@secret, @url, :offset => 600).should == @result2
+        @module.secure_url(@secret, @url, offset: 600).should == @result2
         @result2.should_not == @result1
       end
 
       it "should disable caching with offset" do
-        @module.secure_url(@secret, @url, :offset => 600, :cache => false).should == @result1
+        @module.secure_url(@secret, @url, offset: 600, cache: false).should == @result1
         @result1.should_not == @result2
       end
 
@@ -100,10 +100,10 @@ describe Apache::SecureDownload::Util do
         it "should produce identical URLs for a window of 1 minute (on average)" do
           t = Time.now
 
-          @module.secure_url(@secret, @url, :expires => t,      :cache => 60).should == @result1
-          @module.secure_url(@secret, @url, :expires => t + 30, :cache => 60).should == @result1
-          @module.secure_url(@secret, @url, :expires => t + 60, :cache => 60).should == @result2
-          @module.secure_url(@secret, @url, :expires => t + 90, :cache => 60).should == @result2
+          @module.secure_url(@secret, @url, expires: t,      cache: 60).should == @result1
+          @module.secure_url(@secret, @url, expires: t + 30, cache: 60).should == @result1
+          @module.secure_url(@secret, @url, expires: t + 60, cache: 60).should == @result2
+          @module.secure_url(@secret, @url, expires: t + 90, cache: 60).should == @result2
         end
 
       end
@@ -111,13 +111,13 @@ describe Apache::SecureDownload::Util do
       describe "implicitly (with offset)" do
 
         it "should produce identical URLs for a window of 1 minute (on average)" do
-          @module.secure_url(@secret, @url, :offset => 60).should == @result2
+          @module.secure_url(@secret, @url, offset: 60).should == @result2
           @now += 30  # 30 seconds later...
-          @module.secure_url(@secret, @url, :offset => 60).should == @result2
+          @module.secure_url(@secret, @url, offset: 60).should == @result2
           @now += 30  # 30 seconds later...
-          @module.secure_url(@secret, @url, :offset => 60).should == @result3
+          @module.secure_url(@secret, @url, offset: 60).should == @result3
           @now += 30  # 30 seconds later...
-          @module.secure_url(@secret, @url, :offset => 60).should == @result3
+          @module.secure_url(@secret, @url, offset: 60).should == @result3
         end
 
       end
